@@ -1,0 +1,575 @@
+---
+title: "Cash on Delivery Rejection Prediction"
+author: "Liam"
+date: "2018/7/26"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+货到付款是一种是一种非常受用户青睐的支付方式，对于客户而言，货到付款更加安全，特别是对于一些电商不发达的的确，货到付款能够有效的打消用户对于网购的不信任。
+
+对于商家而言，货到付款这种支付方式不利于现金的流动，并且，有一部分人会在货到了之后不付款，也就是拒收。拒收的原因很多，很简单的就是不想要了。
+
+一般而言，货到付款的拒收率可以高达20%，这将造成很大的运营成本。因此，本文利用机器学习的方法，对用户是否回拒收进行预测。
+
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+# 添加相关的包
+load('/Users/milin/COD\ 建模/markdown.RData')
+library(scorecard)
+library(tidyverse)
+library(DT)          # For Data Tables
+library(lattice)     # The lattice add-on of Trellis graphics for R
+library(knitr)       # For Dynamic Report Generation in R 
+library(gplots)      # Various R Programming Tools for Plotting Data
+library(ggplot2)     # An Implementation of the Grammar of Graphics 
+library(ClustOfVar)  # Clustering of variables 
+library(ape)         # Analyses of Phylogenetics and Evolution (as.phylo) 
+library(Information) # Data Exploration with Information Theory (Weight-of-Evidence and Information Value)
+library(ROCR)        # Model Performance and ROC curve
+library(caret)       # Classification and Regression Training -  for any machine learning algorithms
+library(rpart)       # Recursive partitioning for classification, regression and survival trees
+library(rpart.utils) # Tools for parsing and manipulating rpart objects, including generating machine readable rules
+library(rpart.plot)  # Plot 'rpart' Models: An Enhanced Version of 'plot.rpart'
+library(randomForest)# Leo Breiman and Cutler's Random Forests for Classification and Regression 
+library(party)       # A computational toolbox for recursive partitioning - Conditional inference Trees
+library(bnlearn)     # Bayesian Network Structure Learning, Parameter Learning and Inference
+library(DAAG)        # Data Analysis and Graphics Data and Functions
+library(vcd)         # Visualizing Categorical Data
+library(kernlab)     # Support Vector Machine
+# Following libraries we have load for model 8 and model 9
+#library(neuralnet)  # Neural Network 
+#library(lars)   # For Least Angle Regression, Lasso and Forward Stagewise
+#library(glmnet) # Lasso and Elastic-Net Regularized Generalized Linear Models
+
+```
+
+
+```{r,echo=FALSE,message=FALSE}
+# 自定义函数
+# Function 1: Create function to calculate percent distribution for factors
+pct <- function(x){
+  tbl <- table(x)
+  tbl_pct <- cbind(tbl,round(prop.table(tbl)*100,2))
+  colnames(tbl_pct) <- c('Count','Percentage')
+  kable(tbl_pct)
+}
+
+# pct(cdata$good_bad_21)
+
+# Function 2: Own function to calculate IV, WOE and Eefficiency 
+gbpct <- function(x, y=Model_data$label){
+  mt <- as.matrix(table(as.factor(x), as.factor(y))) # x -> independent variable(vector), y->dependent variable(vector)
+  Total <- mt[,1] + mt[,2]                          # Total observations
+  Total_Pct <- round(Total/sum(mt)*100, 2)          # Total PCT
+  Bad_pct <- round((mt[,1]/sum(mt[,1]))*100, 2)     # PCT of BAd or event or response
+  Good_pct <- round((mt[,2]/sum(mt[,2]))*100, 2)   # PCT of Good or non-event
+  Bad_Rate <- round((mt[,1]/(mt[,1]+mt[,2]))*100, 2) # Bad rate or response rate
+  grp_score <- round((Good_pct/(Good_pct + Bad_pct))*10, 2) # score for each group
+  WOE <- round(log(Good_pct/Bad_pct)*10, 2)      # Weight of Evidence for each group
+  g_b_comp <- ifelse(mt[,1] == mt[,2], 0, 1)
+  IV <- ifelse(g_b_comp == 0, 0, (Good_pct - Bad_pct)*(WOE/10)) # Information value for each group
+  Efficiency <- abs(Good_pct - Bad_pct)/2                       # Efficiency for each group
+  otb<-as.data.frame(cbind(mt, Good_pct,  Bad_pct,  Total, 
+                           Total_Pct,  Bad_Rate, grp_score, 
+                           WOE, IV, Efficiency ))
+  otb$Names <- rownames(otb)
+  rownames(otb) <- NULL
+  otb[,c(12,2,1,3:11)] # return IV table
+}
+
+# Function 3: Normalize using Range
+
+normalize <- function(x) {
+  return((x - min(x)) / (max(x) - min(x)))
+}
+
+```
+
+## 1 介绍
+### 1.1 初步了解使用到的数据
+```{r,message=FALSE}
+kable(as.data.frame(colnames(Model_data)))
+```
+
+### 1.1.2 查看数据的结构
+```{r,message=FALSE}
+str(Model_data)
+```
+
+### 1.1.3 查看数据的基本信息
+```{r}
+summary(Model_data)
+```
+
+## 2 初步的数据分析
+
+### 2.1 修改数据的类型
+```{r,echo=FALSE}
+Model_data$cod运费 <- as.numeric(Model_data$cod运费)
+Model_data$原始来单金额 <- as.numeric(Model_data$原始来单金额)
+Model_data$修改后金额 <- as.numeric(Model_data$修改后金额)
+Model_data$发货件数 <- as.numeric(Model_data$发货件数)
+Model_data$原始来单件数 <- as.numeric(Model_data$原始来单件数)
+Model_data$下单小时 <- as.numeric(Model_data$下单小时)
+Model_data$付款小时 <- as.numeric(Model_data$付款小时)
+Model_data$下单与付款时间间隔 <- as.numeric(Model_data$下单与付款时间间隔)
+Model_data$金额差异 <- as.numeric(Model_data$金额差异)
+Model_data$件数差异 <- as.numeric(Model_data$件数差异)
+Model_data$确认小时 <- as.numeric(Model_data$确认小时)
+Model_data$付款到派送 <- as.numeric(Model_data$付款到派送)
+
+```
+
+
+### 2.2 查看标签的比例
+```{r}
+pct(Model_data$label)
+```
+
+## 3 单变量分析
+WOE(Weight of Evidence):WOE显示了自变量对因变量的预测能力
+
+*WOE=ln(Distribution of Non-Events(Good)Distribution of Events(Bad))*
+
+其通过更基本的比率计算而来:
+
+*(Distribution of Good Credit Outcomes) / (Distribution of Bad Credit Outcomes)*
+
+Information Value(IV):
+
+信息值有利于通过变量的重要性进行筛选变量
+
+*IV=∑(%Non-Events - %Events)∗WOE*
+
+Efficiency:
+
+*Efficiency=Abs(%Non-Events - %Events)/2*
+
+### 3.1 发货方式  
+```{r}
+A1 <- gbpct(Model_data$发货方式)
+
+op1<-par(mfrow=c(1,2), new=TRUE)
+par(family='STKaiti')
+plot(as.factor(Model_data$发货方式), Model_data$label, 
+     ylab="Good-Bad", xlab="发货方式", 
+     main="发货方式对标签的影响")
+
+barplot(A1$WOE, col="brown", names.arg=c(A1$Levels), 
+        main="发货方式的WOE",
+        xlab="发货方式",
+        ylab="WOE"
+)
+```
+
+### 3.2 州 
+```{r,error=FALSE,error=FALSE}
+A1 <- gbpct(Model_data$州)
+
+op1<-par(mfrow=c(1,2), new=TRUE)
+par(family='STKaiti')
+plot(as.factor(Model_data$州), Model_data$label, 
+     ylab="Good-Bad", xlab="州", 
+     main="州对于标签的关系 ")
+
+
+```
+
+### 3.3 用户性别
+```{r}
+A1 <- gbpct(Model_data$用户性别)
+
+op1<-par(mfrow=c(1,2), new=TRUE)
+par(family='STKaiti')
+plot(as.factor(Model_data$用户性别), Model_data$label, 
+     ylab="Good-Bad", xlab="用户性别", 
+     main="用户性别对于标签的关系 ")
+
+barplot(A1$WOE, col="brown", names.arg=c(A1$Levels), 
+        main="用户性别的WOE",
+        xlab="用户性别",
+        ylab="WOE"
+)
+```
+### 3.4 用户设备  
+```{r}
+
+A1 <- gbpct(Model_data$用户设备)
+
+op1<-par(mfrow=c(1,2), new=TRUE)
+par(family='STKaiti')
+plot(as.factor(Model_data$用户设备), Model_data$label, 
+     ylab="Good-Bad", xlab="用户设备", 
+     main="用户设别与标签的关系")
+
+barplot(A1$WOE, col="brown", names.arg=c(A1$Levels), 
+        main="用户设备的WOE",
+        xlab="用户设备",
+        ylab="WOE"
+)
+```
+
+### 3.5 操作系统版本
+```{r}
+
+
+A1 <- gbpct(Model_data$app1)
+
+op1<-par(mfrow=c(1,2), new=TRUE)
+par(family='STKaiti')
+plot(as.factor(Model_data$app1), Model_data$label, 
+     ylab="Good-Bad", xlab="操作系统", 
+     main="操作系统版本与标签的关系 ")
+
+# barplot(A1$WOE, col="brown", names.arg=c(A1$Levels), 
+#         main="Score:Checking Shipping method Status",
+#         xlab="Category",
+#         ylab="WOE"
+# )
+```
+
+### 3.6 用户类别
+```{r}
+
+A1 <- gbpct(Model_data$用户类型)
+
+op1<-par(mfrow=c(1,2), new=TRUE)
+par(family='STKaiti')
+plot(as.factor(Model_data$用户类型), Model_data$label, 
+     ylab="Good-Bad", xlab="用户类型", 
+     main="用户类型与标签的关系")
+
+barplot(A1$WOE, col="brown", names.arg=c(A1$Levels), 
+        main="用户类型的WOE",
+        xlab="用户类型",
+        ylab="WOE"
+)
+```
+
+
+### 3.7 地址类型
+```{r}
+A1 <- gbpct(Model_data$地址种类)
+
+op1<-par(mfrow=c(1,2), new=TRUE)
+par(family='STKaiti')
+plot(as.factor(Model_data$地址种类), Model_data$label, 
+     ylab="Good-Bad", xlab="地址类型", 
+     main="地址类型与标签的关系")
+
+barplot(A1$WOE, col="brown", names.arg=c(A1$Levels), 
+        main="地址类型WOE",
+        xlab="地址类型",
+        ylab="WOE"
+)
+```
+
+### 3.8 下单时间(小时) 
+```{r}
+A1 <- gbpct(Model_data$下单小时)
+
+op1<-par(mfrow=c(1,2), new=TRUE)
+par(family='STKaiti')
+plot(as.factor(Model_data$下单小时), Model_data$label, 
+     ylab="Good-Bad", xlab="下单时间(小时)", 
+     main="下单时间(小时)与标签的关系 ")
+
+barplot(A1$WOE, col="brown", names.arg=c(A1$Levels), 
+        main="下单时间(小时)WOE",
+        xlab="下单时间(小时)",
+        ylab="WOE"
+)
+```
+
+### 3.9 付款时间(小时)
+```{r}
+
+A1 <- gbpct(Model_data$付款小时)
+
+op1<-par(mfrow=c(1,2), new=TRUE)
+par(family='STKaiti')
+plot(as.factor(Model_data$付款小时), Model_data$label, 
+     ylab="Good-Bad", xlab="付款时间(小时)", 
+     main="付款时间(小时)与标签的关系")
+
+barplot(A1$WOE, col="brown", names.arg=c(A1$Levels), 
+        main="付款时间(小时)WOE",
+        xlab="Category",
+        ylab="WOE"
+)
+```
+
+
+##  计算信息值(Information Value) 和 WOE (Weight of Evidence)
+```{r}
+kable(iv)
+
+bins
+```
+
+1. 下面这些变量是没有预测能力或者预测能力非常弱的一些变量 (IV< 2%), 因此可以直接将这些变量筛选掉
+
+```{r,message=FALSE}
+library(tidyverse)
+kable(iv %>% filter(info_value<0.02))
+```
+
+2. 下面这一部分变量只是有非常弱的预测变量 (2%<=IV< 10%), 因此可以考虑加上这一部分变量，也可以不加上这些变量
+
+```{r,message=FALSE}
+library(tidyverse)
+kable(iv %>% filter(info_value>=0.02,info_value<0.1))
+```
+
+3. 这些变量有一定的预测能力 (10%<=IV< 30%), 可以考虑选取其中一些变量加入到模型里面去
+
+```{r,message=FALSE}
+library(tidyverse)
+kable(iv %>% filter(info_value>=0.1,info_value<0.3))
+```
+
+4. 这些变量有比较强的预测能力 (IV 30% to 50%),模型选取这一部分变量进行建模
+```{r,message=FALSE}
+library(tidyverse)
+kable(iv %>% filter(info_value>=0.3,info_value<0.5))
+```
+
+
+## 4 选取进行建模的变量
+```{r}
+var_list_1 <- iv %>% filter(info_value>0.1) %>% select(variable) # 15 variables
+Model_data1 <- Model_data %>% select(var_list_1$variable,label) #12 variables
+head(Model_data1)
+```
+
+
+## 5 多元数据分析 - 聚类，降维
+
+对变量的聚类可以讲含有相同信息的变量聚为同一个族类
+
+当我们有大量的变量的时候，这种方法可以很好的用于进行降维。同样可以用于降维的方法还有主成分分析和因子分析。
+```{r}
+Model_data1$app1 <- as.factor(Model_data1$app1)
+Model_data1$label <- as.factor(Model_data1$label)
+Model_data1$地址种类 <- as.factor(Model_data1$地址种类)
+Model_data1$发货方式 <- as.factor(Model_data1$发货方式)
+Model_data1$用户性别 <- as.factor(Model_data1$用户性别)
+Model_data1$州 <- as.factor(Model_data1$州)
+```
+
+```{r}
+factors <- sapply(Model_data1, is.factor)
+#subset Qualitative variables 
+vars_quali <- Model_data1 %>% select(names(Model_data1)[factors])
+#vars_quali$good_bad_21<-vars_quali$good_bad_21[drop=TRUE] # remove empty factors
+str(vars_quali)
+```
+
+```{r}
+#subset Quantitative variables 
+vars_quanti <- Model_data1 %>% select(names(Model_data1)[!factors])
+str(vars_quanti)
+```
+
+  ## 6 变量的层次聚类
+
+```{r}
+ 
+
+tree <- hclustvar(X.quanti=vars_quanti,X.quali=vars_quali)
+par(family='STKaiti')
+plot(tree, main="variable clustering")
+rect.hclust(tree, k=8,  border = 1:8)
+
+```
+
+```{r}
+summary(tree)
+# Phylogenetic trees
+# require library("ape")
+par(family='STKaiti')
+plot(as.phylo(tree), type = "fan",
+     tip.color = hsv(runif(15, 0.65,  0.95), 1, 1, 0.7),
+     edge.color = hsv(runif(10, 0.65, 0.75), 1, 1, 0.7), 
+     edge.width = runif(20,  0.5, 3), use.edge.length = TRUE, col = "gray80")
+summary.phylo(as.phylo(tree))
+```
+
+```{r}
+part<-cutreevar(tree,8)
+print(part)
+summary(part)
+```
+
+## 7 通过聚类选取部分变量
+```{r}
+# cod运费 
+# 付款到派送  
+# keep<- c(1,2,3,4,7,8,10,12)
+cdata_reduced_2 <- Model_data1 # %>% select(keep)
+str(cdata_reduced_2)
+```
+
+
+## 8 划分选来集合测试集合
+```{r}
+bins <-  scorecard::woebin(cdata_reduced_2,y = 'label')
+dt_woe <- scorecard::woebin_ply(cdata_reduced_2,bins)
+
+dt_woe$label <- as.factor(dt_woe$label)
+
+div_part_1 <- createDataPartition(y = dt_woe$label, p = 0.7, list = F)
+
+# Training Sample
+train_1 <- dt_woe[div_part_1,] # 70% here
+pct(train_1$label)
+
+# Test Sample
+test_1 <- dt_woe[-div_part_1,] # rest of the 30% data goes here
+pct(test_1$label)
+```
+
+
+## 9 训练模型以及模型选择
+
+
+### 9.1 逻辑回归以及逐步回归
+```{r}
+m1 <- glm(label~.,data=train_1,family=binomial())
+m1 <- step(m1)
+summary(m1)
+```
+
+```{r}
+
+significant.variables <- summary(m1)$coeff[-1,4] < 0.01
+names(significant.variables)[significant.variables == TRUE]
+```
+
+```{r}
+dt_pred = predict(m1, type='response', test_1)
+perf_eva(test_1$label, dt_pred, type = c("ks","lift","roc","pr"))
+
+```
+
+### 9.2 随即森林
+
+```{r}
+
+
+m3 <- randomForest(label ~ ., data = train_1)
+par(family='STKaiti')
+varImpPlot(m3, main="Random Forest: Variable Importance")
+```
+
+
+```{r}
+dt_pred = predict(m3, type='prob', test_1)[,1]
+perf_eva(test_1$label, dt_pred, type = c("ks","lift","roc","pr"))
+```
+不平衡的数据会造成非常低AUC，需要尝试解决样本不平衡的问题
+
+####  欠抽样
+```{r}
+
+load('/Users/milin/COD\ 建模/model_rf_under.RData')
+load('/Users/milin/COD\ 建模/dt_woe.RData')
+require(scorecard)
+dt_pred = predict(model_rf_under, type = 'prob', dt_woe)
+
+
+perf_eva(dt_woe$label, dt_pred$`1`)
+```
+
+####  重抽样
+```{r}
+
+load('/Users/milin/COD\ 建模/model_rf_under1.RData')
+dt_pred = predict(model_rf_under, type = 'prob', dt_woe)
+
+
+perf_eva(dt_woe$label, dt_pred$`1`)
+```
+
+
+
+#### 附录 A: 使用到的包
+##### A.1 library(lattice)
+The lattice add-on of Trellis graphics for R. Ref:https://cran.r-project.org/web/packages/lattice/lattice.pdf
+
+#### A.2 library(knitr)
+For Dynamic Report Generation in R. Ref: https://cran.r-project.org/web/packages/knitr/knitr.pdf
+
+#### A.3 library(gplots)
+Various R Programming Tools for Plotting Data. Ref:https://cran.r-project.org/web/packages/gplots/gplots.pdf
+
+#### A.4 library(ggplot2)
+An Implementation of the Grammar of Graphics. Ref: https://cran.rstudio.com/web/packages/ggplot2/ggplot2.pdf
+
+#### A.5 library(ClustOfVar)
+Clustering of variables. Ref: https://cran.r-project.org/web/packages/ClustOfVar/ClustOfVar.pdf
+
+#### A.6 library(ape)
+Analyses of Phylogenetics and Evolution (as.phylo). Ref: https://cran.r-project.org/web/packages/ape/ape.pdf
+
+#### A.7 library(Information)
+Data Exploration with Information Theory (Weight-of-Evidence and Information Value). Ref: https://cran.r-project.org/web/packages/Information/Information.pdf
+
+#### A.8 library(ROCR)
+Visualizing the Performance of Scoring Classifiers. Ref: https://cran.r-project.org/web/packages/ROCR/ROCR.pdf
+
+#### A.9 library(caret)
+Classification and Regression Training - for any machine learning algorithms. Ref: ftp://cran.r-project.org/pub/R/web/packages/caret/caret.pdf
+
+#### A.10 library(rpart)
+Recursive partitioning for classification, regression and survival trees. Ref: https://cran.r-project.org/web/packages/rpart/rpart.pdf
+
+#### A.10.1 library(rpart.utils)
+Tools for parsing and manipulating rpart objects, including generating machine readable rules. Ref: https://cran.r-project.org/web/packages/rpart.utils/rpart.utils.pdf
+
+#### A.10.2 library(rpart.plot)
+Plot ‘rpart’ Models: An Enhanced Version of ‘plot.rpart’. Ref: https://cran.r-project.org/web/packages/knitr/knitr.pdf
+
+#### A.11 library(randomForest)
+Leo Breiman and Cutler’s Random Forests for Classification and Regression. Ref: https://cran.r-project.org/web/packages/randomForest/randomForest.pdf
+
+#### A.12 library(party)
+A computational toolbox for recursive partitioning - Conditional inference Trees. Ref: https://cran.r-project.org/web/packages/party/party.pdf
+
+#### A.13 library(bnlearn)
+Bayesian Network Structure Learning, Parameter Learning and Inference. Ref: https://cran.r-project.org/web/packages/bnlearn/bnlearn.pdf
+
+#### A.14 library(DAAG)
+Data Analysis and Graphics Data and Functions. Ref: https://cran.r-project.org/web/packages/DAAG/DAAG.pdf
+
+#### A.15 library(vcd)
+Visualizing Categorical Data. Ref: https://cran.r-project.org/web/packages/vcd/vcd.pdf
+
+#### A.16 library(neuralnet)
+Neural Network implementation. Ref: https://cran.r-project.org/web/packages/neuralnet/neuralnet.pdf
+
+#### A.17 library(kernlab)
+Kernel-Based Machine Learning Lab. Ref: https://cran.r-project.org/web/packages/kernlab/kernlab.pdf
+
+#### A.18 library(glmnet)
+Lasso and Elastic-Net Regularized Generalized Linear Models. Ref: https://cran.r-project.org/web/packages/glmnet/glmnet.pdf
+
+#### A.19 library(lars)
+Least Angle Regression, Lasso and Forward Stagewise. Ref: ftp://cran.r-project.org/pub/R/web/packages/lars/lars.pdf
+
+### 参考
+
+#####WOE变换与信息值
+
+1. http://www.ponssard.net/wp-content/uploads/2011/02/on-the-concept-of-the-value-of-information.pdf
+2. http://research.microsoft.com/en-us/um/people/horvitz/gev.pdf
+3. http://ucanalytics.com/blogs/information-value-and-weight-of-evidencebanking-case/
+4. http://www.listendata.com/2015/03/weight-of-evidence-woe-and-information.html
+5. https://github.com/klarsen1/gampost/blob/master/compare_models.r
+6. https://www.r-bloggers.com/r-credit-scoring-woe-information-value-in-woe-package/
+7. http://www.mwsug.org/proceedings/2013/AA/MWSUG-2013-AA14.pdf
