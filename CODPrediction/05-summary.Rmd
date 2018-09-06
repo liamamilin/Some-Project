@@ -1,0 +1,64 @@
+# 附录 A: 使用到的包
+
+## library(lattice)
+The lattice add-on of Trellis graphics for R. Ref:https://cran.r-project.org/web/packages/lattice/lattice.pdf
+
+## A.2 library(knitr)
+For Dynamic Report Generation in R. Ref: https://cran.r-project.org/web/packages/knitr/knitr.pdf
+
+## A.3 library(gplots)
+Various R Programming Tools for Plotting Data. Ref:https://cran.r-project.org/web/packages/gplots/gplots.pdf
+
+## A.4 library(ggplot2)
+An Implementation of the Grammar of Graphics. Ref: https://cran.rstudio.com/web/packages/ggplot2/ggplot2.pdf
+
+## A.5 library(ClustOfVar)
+Clustering of variables. Ref: https://cran.r-project.org/web/packages/ClustOfVar/ClustOfVar.pdf
+
+## A.6 library(ape)
+Analyses of Phylogenetics and Evolution (as.phylo). Ref: https://cran.r-project.org/web/packages/ape/ape.pdf
+
+## A.7 library(Information)
+Data Exploration with Information Theory (Weight-of-Evidence and Information Value). Ref: https://cran.r-project.org/web/packages/Information/Information.pdf
+
+## A.8 library(ROCR)
+Visualizing the Performance of Scoring Classifiers. Ref: https://cran.r-project.org/web/packages/ROCR/ROCR.pdf
+
+## A.9 library(caret)
+Classification and Regression Training - for any machine learning algorithms. Ref: ftp://cran.r-project.org/pub/R/web/packages/caret/caret.pdf
+
+## A.10 library(rpart)
+Recursive partitioning for classification, regression and survival trees. Ref: https://cran.r-project.org/web/packages/rpart/rpart.pdf
+
+## A.10.1 library(rpart.utils)
+Tools for parsing and manipulating rpart objects, including generating machine readable rules. Ref: https://cran.r-project.org/web/packages/rpart.utils/rpart.utils.pdf
+
+## A.10.2 library(rpart.plot)
+Plot ‘rpart’ Models: An Enhanced Version of ‘plot.rpart’. Ref: https://cran.r-project.org/web/packages/knitr/knitr.pdf
+
+## A.11 library(randomForest)
+Leo Breiman and Cutler’s Random Forests for Classification and Regression. Ref: https://cran.r-project.org/web/packages/randomForest/randomForest.pdf
+
+## A.12 library(party)
+A computational toolbox for recursive partitioning - Conditional inference Trees. Ref: https://cran.r-project.org/web/packages/party/party.pdf
+
+## A.13 library(bnlearn)
+Bayesian Network Structure Learning, Parameter Learning and Inference. Ref: https://cran.r-project.org/web/packages/bnlearn/bnlearn.pdf
+
+## A.14 library(DAAG)
+Data Analysis and Graphics Data and Functions. Ref: https://cran.r-project.org/web/packages/DAAG/DAAG.pdf
+
+## A.15 library(vcd)
+Visualizing Categorical Data. Ref: https://cran.r-project.org/web/packages/vcd/vcd.pdf
+
+## A.16 library(neuralnet)
+Neural Network implementation. Ref: https://cran.r-project.org/web/packages/neuralnet/neuralnet.pdf
+
+## A.17 library(kernlab)
+Kernel-Based Machine Learning Lab. Ref: https://cran.r-project.org/web/packages/kernlab/kernlab.pdf
+
+## A.18 library(glmnet)
+Lasso and Elastic-Net Regularized Generalized Linear Models. Ref: https://cran.r-project.org/web/packages/glmnet/glmnet.pdf
+
+## A.19 library(lars)
+Least Angle Regression, Lasso and Forward Stagewise. Ref: ftp://cran.r-project.org/pub/R/web/packages/lars/lars.pdf

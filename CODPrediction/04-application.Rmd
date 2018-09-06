@@ -1,0 +1,81 @@
+# 建模
+
+##   划分选来集合测试集合
+```{r}
+bins <-  scorecard::woebin(cdata_reduced_2,y = 'label')
+dt_woe <- scorecard::woebin_ply(cdata_reduced_2,bins)
+
+dt_woe$label <- as.factor(dt_woe$label)
+
+div_part_1 <- createDataPartition(y = dt_woe$label, p = 0.7, list = F)
+
+# Training Sample
+train_1 <- dt_woe[div_part_1,] # 70% here
+pct(train_1$label)
+
+# Test Sample
+test_1 <- dt_woe[-div_part_1,] # rest of the 30% data goes here
+pct(test_1$label)
+```
+
+
+##  训练模型以及模型选择
+
+
+###  逻辑回归以及逐步回归
+```{r}
+m1 <- glm(label~.,data=train_1,family=binomial())
+m1 <- step(m1)
+summary(m1)
+```
+
+```{r}
+
+significant.variables <- summary(m1)$coeff[-1,4] < 0.01
+names(significant.variables)[significant.variables == TRUE]
+```
+
+```{r}
+dt_pred = predict(m1, type='response', test_1)
+perf_eva(test_1$label, dt_pred, type = c("ks","lift","roc","pr"))
+
+```
+
+###  随即森林
+
+```{r}
+
+
+m3 <- randomForest(label ~ ., data = train_1)
+par(family='STKaiti')
+varImpPlot(m3, main="Random Forest: Variable Importance")
+```
+
+
+```{r}
+dt_pred = predict(m3, type='prob', test_1)[,1]
+perf_eva(test_1$label, dt_pred, type = c("ks","lift","roc","pr"))
+```
+不平衡的数据会造成非常低AUC，需要尝试解决样本不平衡的问题
+
+###  欠抽样
+```{r}
+
+load('/Users/milin/COD\ 建模/model_rf_under.RData')
+load('/Users/milin/COD\ 建模/dt_woe.RData')
+require(scorecard)
+dt_pred = predict(model_rf_under, type = 'prob', dt_woe)
+
+
+perf_eva(dt_woe$label, dt_pred$`1`)
+```
+
+####  重抽样
+```{r}
+
+load('/Users/milin/COD\ 建模/model_rf_under1.RData')
+dt_pred = predict(model_rf_under, type = 'prob', dt_woe)
+
+
+perf_eva(dt_woe$label, dt_pred$`1`)
+```

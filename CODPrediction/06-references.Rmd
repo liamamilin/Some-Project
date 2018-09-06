@@ -1,0 +1,14 @@
+`r if (knitr::is_html_output()) '
+# 参考 {-}
+'`
+
+
+WOE变换与信息值
+
+1. http://www.ponssard.net/wp-content/uploads/2011/02/on-the-concept-of-the-value-of-information.pdf
+2. http://research.microsoft.com/en-us/um/people/horvitz/gev.pdf
+3. http://ucanalytics.com/blogs/information-value-and-weight-of-evidencebanking-case/
+4. http://www.listendata.com/2015/03/weight-of-evidence-woe-and-information.html
+5. https://github.com/klarsen1/gampost/blob/master/compare_models.r
+6. https://www.r-bloggers.com/r-credit-scoring-woe-information-value-in-woe-package/
+7. http://www.mwsug.org/proceedings/2013/AA/MWSUG-2013-AA14.pdf

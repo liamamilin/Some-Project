@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Cod Prediction</title>
+  <meta name="description" content="关于货到付款支付方式的客户的拒收预测">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Cod Prediction" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="关于货到付款支付方式的客户的拒收预测" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Cod Prediction" />
+  
+  <meta name="twitter:description" content="关于货到付款支付方式的客户的拒收预测" />
+  
+
+<meta name="author" content="Liam">
+
+
+<meta name="date" content="2018-09-06">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="-.html">
+<link rel="next" href="-a-.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 简介</a></li>
+<li class="chapter" data-level="2" data-path="section-2.html"><a href="section-2.html"><i class="fa fa-check"></i><b>2</b> 数据</a><ul>
+<li class="chapter" data-level="2.1" data-path="section-2.html"><a href="section-2.html#section-2.1"><i class="fa fa-check"></i><b>2.1</b> 初步了解数据</a></li>
+<li class="chapter" data-level="2.2" data-path="section-2.html"><a href="section-2.html#section-2.2"><i class="fa fa-check"></i><b>2.2</b> 查看数据的结构</a></li>
+<li class="chapter" data-level="2.3" data-path="section-2.html"><a href="section-2.html#section-2.3"><i class="fa fa-check"></i><b>2.3</b> 查看数据的基本信息</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="section-3.html"><a href="section-3.html"><i class="fa fa-check"></i><b>3</b> 数据分析</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="section-3.html"><a href="section-3.html#section-3.0.1"><i class="fa fa-check"></i><b>3.0.1</b> 修改数据的类型</a></li>
+<li class="chapter" data-level="3.1" data-path="section-3.html"><a href="section-3.html#section-3.1"><i class="fa fa-check"></i><b>3.1</b> 查看标签的比例</a></li>
+<li class="chapter" data-level="3.2" data-path="section-3.html"><a href="section-3.html#section-3.2"><i class="fa fa-check"></i><b>3.2</b> 单变量分析</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="section-3.html"><a href="section-3.html#section-3.2.1"><i class="fa fa-check"></i><b>3.2.1</b> 发货方式</a></li>
+<li class="chapter" data-level="3.2.2" data-path="section-3.html"><a href="section-3.html#section-3.2.2"><i class="fa fa-check"></i><b>3.2.2</b> 州</a></li>
+<li class="chapter" data-level="3.2.3" data-path="section-3.html"><a href="section-3.html#section-3.2.3"><i class="fa fa-check"></i><b>3.2.3</b> 用户性别</a></li>
+<li class="chapter" data-level="3.2.4" data-path="section-3.html"><a href="section-3.html#section-3.2.4"><i class="fa fa-check"></i><b>3.2.4</b> 操作系统版本</a></li>
+<li class="chapter" data-level="3.2.5" data-path="section-3.html"><a href="section-3.html#section-3.2.5"><i class="fa fa-check"></i><b>3.2.5</b> 用户类别</a></li>
+<li class="chapter" data-level="3.2.6" data-path="section-3.html"><a href="section-3.html#section-3.2.6"><i class="fa fa-check"></i><b>3.2.6</b> 地址类型</a></li>
+<li class="chapter" data-level="3.2.7" data-path="section-3.html"><a href="section-3.html#section-3.2.7"><i class="fa fa-check"></i><b>3.2.7</b> 下单时间(小时)</a></li>
+<li class="chapter" data-level="3.2.8" data-path="section-3.html"><a href="section-3.html#section-3.2.8"><i class="fa fa-check"></i><b>3.2.8</b> 付款时间(小时)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="section-3.html"><a href="section-3.html#information-value--woe-weight-of-evidence"><i class="fa fa-check"></i><b>3.3</b> 计算信息值(Information Value) 和 WOE (Weight of Evidence)</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="-.html"><a href="-.html"><i class="fa fa-check"></i><b>4</b> 多元数据分析 - 聚类，降维</a><ul>
+<li class="chapter" data-level="4.1" data-path="-.html"><a href="-.html#section-4.1"><i class="fa fa-check"></i><b>4.1</b> 6 变量的层次聚类</a></li>
+<li class="chapter" data-level="4.2" data-path="-.html"><a href="-.html#section-4.2"><i class="fa fa-check"></i><b>4.2</b> 7 通过聚类选取部分变量</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="section-5.html"><a href="section-5.html"><i class="fa fa-check"></i><b>5</b> 建模</a><ul>
+<li class="chapter" data-level="5.1" data-path="section-5.html"><a href="section-5.html#section-5.1"><i class="fa fa-check"></i><b>5.1</b> 划分选来集合测试集合</a></li>
+<li class="chapter" data-level="5.2" data-path="section-5.html"><a href="section-5.html#section-5.2"><i class="fa fa-check"></i><b>5.2</b> 训练模型以及模型选择</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="section-5.html"><a href="section-5.html#section-5.2.1"><i class="fa fa-check"></i><b>5.2.1</b> 逻辑回归以及逐步回归</a></li>
+<li class="chapter" data-level="5.2.2" data-path="section-5.html"><a href="section-5.html#section-5.2.2"><i class="fa fa-check"></i><b>5.2.2</b> 随即森林</a></li>
+<li class="chapter" data-level="5.2.3" data-path="section-5.html"><a href="section-5.html#section-5.2.3"><i class="fa fa-check"></i><b>5.2.3</b> 欠抽样</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="-a-.html"><a href="-a-.html"><i class="fa fa-check"></i><b>6</b> 附录 A: 使用到的包</a><ul>
+<li class="chapter" data-level="6.1" data-path="-a-.html"><a href="-a-.html#librarylattice"><i class="fa fa-check"></i><b>6.1</b> library(lattice)</a></li>
+<li class="chapter" data-level="6.2" data-path="-a-.html"><a href="-a-.html#a.2-libraryknitr"><i class="fa fa-check"></i><b>6.2</b> A.2 library(knitr)</a></li>
+<li class="chapter" data-level="6.3" data-path="-a-.html"><a href="-a-.html#a.3-librarygplots"><i class="fa fa-check"></i><b>6.3</b> A.3 library(gplots)</a></li>
+<li class="chapter" data-level="6.4" data-path="-a-.html"><a href="-a-.html#a.4-libraryggplot2"><i class="fa fa-check"></i><b>6.4</b> A.4 library(ggplot2)</a></li>
+<li class="chapter" data-level="6.5" data-path="-a-.html"><a href="-a-.html#a.5-libraryclustofvar"><i class="fa fa-check"></i><b>6.5</b> A.5 library(ClustOfVar)</a></li>
+<li class="chapter" data-level="6.6" data-path="-a-.html"><a href="-a-.html#a.6-libraryape"><i class="fa fa-check"></i><b>6.6</b> A.6 library(ape)</a></li>
+<li class="chapter" data-level="6.7" data-path="-a-.html"><a href="-a-.html#a.7-libraryinformation"><i class="fa fa-check"></i><b>6.7</b> A.7 library(Information)</a></li>
+<li class="chapter" data-level="6.8" data-path="-a-.html"><a href="-a-.html#a.8-libraryrocr"><i class="fa fa-check"></i><b>6.8</b> A.8 library(ROCR)</a></li>
+<li class="chapter" data-level="6.9" data-path="-a-.html"><a href="-a-.html#a.9-librarycaret"><i class="fa fa-check"></i><b>6.9</b> A.9 library(caret)</a></li>
+<li class="chapter" data-level="6.10" data-path="-a-.html"><a href="-a-.html#a.10-libraryrpart"><i class="fa fa-check"></i><b>6.10</b> A.10 library(rpart)</a></li>
+<li class="chapter" data-level="6.11" data-path="-a-.html"><a href="-a-.html#a.10.1-libraryrpart.utils"><i class="fa fa-check"></i><b>6.11</b> A.10.1 library(rpart.utils)</a></li>
+<li class="chapter" data-level="6.12" data-path="-a-.html"><a href="-a-.html#a.10.2-libraryrpart.plot"><i class="fa fa-check"></i><b>6.12</b> A.10.2 library(rpart.plot)</a></li>
+<li class="chapter" data-level="6.13" data-path="-a-.html"><a href="-a-.html#a.11-libraryrandomforest"><i class="fa fa-check"></i><b>6.13</b> A.11 library(randomForest)</a></li>
+<li class="chapter" data-level="6.14" data-path="-a-.html"><a href="-a-.html#a.12-libraryparty"><i class="fa fa-check"></i><b>6.14</b> A.12 library(party)</a></li>
+<li class="chapter" data-level="6.15" data-path="-a-.html"><a href="-a-.html#a.13-librarybnlearn"><i class="fa fa-check"></i><b>6.15</b> A.13 library(bnlearn)</a></li>
+<li class="chapter" data-level="6.16" data-path="-a-.html"><a href="-a-.html#a.14-librarydaag"><i class="fa fa-check"></i><b>6.16</b> A.14 library(DAAG)</a></li>
+<li class="chapter" data-level="6.17" data-path="-a-.html"><a href="-a-.html#a.15-libraryvcd"><i class="fa fa-check"></i><b>6.17</b> A.15 library(vcd)</a></li>
+<li class="chapter" data-level="6.18" data-path="-a-.html"><a href="-a-.html#a.16-libraryneuralnet"><i class="fa fa-check"></i><b>6.18</b> A.16 library(neuralnet)</a></li>
+<li class="chapter" data-level="6.19" data-path="-a-.html"><a href="-a-.html#a.17-librarykernlab"><i class="fa fa-check"></i><b>6.19</b> A.17 library(kernlab)</a></li>
+<li class="chapter" data-level="6.20" data-path="-a-.html"><a href="-a-.html#a.18-libraryglmnet"><i class="fa fa-check"></i><b>6.20</b> A.18 library(glmnet)</a></li>
+<li class="chapter" data-level="6.21" data-path="-a-.html"><a href="-a-.html#a.19-librarylars"><i class="fa fa-check"></i><b>6.21</b> A.19 library(lars)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="e58f82e88083.html"><a href="e58f82e88083.html"><i class="fa fa-check"></i>参考</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Cod Prediction</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="section-5" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> 建模</h1>
+<div id="section-5.1" class="section level2">
+<h2><span class="header-section-number">5.1</span> 划分选来集合测试集合</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bins &lt;-<span class="st">  </span>scorecard<span class="op">::</span><span class="kw">woebin</span>(cdata_reduced_<span class="dv">2</span>,<span class="dt">y =</span> <span class="st">&#39;label&#39;</span>)
+dt_woe &lt;-<span class="st"> </span>scorecard<span class="op">::</span><span class="kw">woebin_ply</span>(cdata_reduced_<span class="dv">2</span>,bins)</code></pre></div>
+<pre><code>## Woe transformating on 322715 rows and 11 columns in 00:00:12</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt_woe<span class="op">$</span>label &lt;-<span class="st"> </span><span class="kw">as.factor</span>(dt_woe<span class="op">$</span>label)
+
+div_part_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">createDataPartition</span>(<span class="dt">y =</span> dt_woe<span class="op">$</span>label, <span class="dt">p =</span> <span class="fl">0.7</span>, <span class="dt">list =</span> F)
+
+<span class="co"># Training Sample</span>
+train_<span class="dv">1</span> &lt;-<span class="st"> </span>dt_woe[div_part_<span class="dv">1</span>,] <span class="co"># 70% here</span>
+<span class="kw">pct</span>(train_<span class="dv">1</span><span class="op">$</span>label)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Count</th>
+<th align="right">Percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td align="right">199708</td>
+<td align="right">88.41</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td align="right">26193</td>
+<td align="right">11.59</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Test Sample</span>
+test_<span class="dv">1</span> &lt;-<span class="st"> </span>dt_woe[<span class="op">-</span>div_part_<span class="dv">1</span>,] <span class="co"># rest of the 30% data goes here</span>
+<span class="kw">pct</span>(test_<span class="dv">1</span><span class="op">$</span>label)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Count</th>
+<th align="right">Percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td align="right">85589</td>
+<td align="right">88.41</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td align="right">11225</td>
+<td align="right">11.59</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="section-5.2" class="section level2">
+<h2><span class="header-section-number">5.2</span> 训练模型以及模型选择</h2>
+<div id="section-5.2.1" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> 逻辑回归以及逐步回归</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m1 &lt;-<span class="st"> </span><span class="kw">glm</span>(label<span class="op">~</span>.,<span class="dt">data=</span>train_<span class="dv">1</span>,<span class="dt">family=</span><span class="kw">binomial</span>())
+m1 &lt;-<span class="st"> </span><span class="kw">step</span>(m1)</code></pre></div>
+<pre><code>## Start:  AIC=141064.5
+## label ~ 地址种类_woe + app1_woe + 下单与付款时间间隔_woe + 
+##     cod运费_woe + 修改后金额_woe + 原始来单金额_woe + 
+##     金额差异_woe + 付款到派送_woe + 发货方式_woe + 
+##     用户性别_woe + 州_woe
+## 
+## 
+## Step:  AIC=141064.5
+## label ~ 地址种类_woe + app1_woe + 下单与付款时间间隔_woe + 
+##     cod运费_woe + 修改后金额_woe + 原始来单金额_woe + 
+##     付款到派送_woe + 发货方式_woe + 用户性别_woe + 
+##     州_woe
+## 
+##                          Df Deviance    AIC
+## - 修改后金额_woe          1   141042 141062
+## &lt;none&gt;                        141042 141064
+## - 原始来单金额_woe        1   141053 141073
+## - cod运费_woe             1   141170 141190
+## - 下单与付款时间间隔_woe  1   141309 141329
+## - 州_woe                  1   141389 141409
+## - 发货方式_woe            1   141516 141536
+## - 用户性别_woe            1   142610 142630
+## - 付款到派送_woe          1   145987 146007
+## - app1_woe                1   146280 146300
+## - 地址种类_woe            1   146451 146471
+## 
+## Step:  AIC=141062.5
+## label ~ 地址种类_woe + app1_woe + 下单与付款时间间隔_woe + 
+##     cod运费_woe + 原始来单金额_woe + 付款到派送_woe + 
+##     发货方式_woe + 用户性别_woe + 州_woe
+## 
+##                          Df Deviance    AIC
+## &lt;none&gt;                        141042 141062
+## - 原始来单金额_woe        1   141123 141141
+## - cod运费_woe             1   141172 141190
+## - 下单与付款时间间隔_woe  1   141309 141327
+## - 州_woe                  1   141389 141407
+## - 发货方式_woe            1   141516 141534
+## - 用户性别_woe            1   142610 142628
+## - 付款到派送_woe          1   145988 146006
+## - app1_woe                1   146280 146298
+## - 地址种类_woe            1   146451 146469</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(m1)</code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = label ~ 地址种类_woe + app1_woe + 下单与付款时间间隔_woe + 
+##     cod运费_woe + 原始来单金额_woe + 付款到派送_woe + 
+##     发货方式_woe + 用户性别_woe + 州_woe, family = binomial(), 
+##     data = train_1)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.5995  -0.5347  -0.3976  -0.2337   3.8521  
+## 
+## Coefficients:
+##                         Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)            -2.036266   0.007616 -267.35   &lt;2e-16 ***
+## 地址种类_woe            1.011125   0.021069   47.99   &lt;2e-16 ***
+## app1_woe                1.017471   0.015451   65.85   &lt;2e-16 ***
+## 下单与付款时间间隔_woe  0.952940   0.058721   16.23   &lt;2e-16 ***
+## cod运费_woe             0.529066   0.046369   11.41   &lt;2e-16 ***
+## 原始来单金额_woe        0.398816   0.044658    8.93   &lt;2e-16 ***
+## 付款到派送_woe          1.410965   0.021934   64.33   &lt;2e-16 ***
+## 发货方式_woe            0.807609   0.037204   21.71   &lt;2e-16 ***
+## 用户性别_woe            0.795311   0.019860   40.05   &lt;2e-16 ***
+## 州_woe                  0.559377   0.030152   18.55   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 162095  on 225900  degrees of freedom
+## Residual deviance: 141042  on 225891  degrees of freedom
+## AIC: 141062
+## 
+## Number of Fisher Scoring iterations: 7</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">significant.variables &lt;-<span class="st"> </span><span class="kw">summary</span>(m1)<span class="op">$</span>coeff[<span class="op">-</span><span class="dv">1</span>,<span class="dv">4</span>] <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.01</span>
+<span class="kw">names</span>(significant.variables)[significant.variables <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>]</code></pre></div>
+<pre><code>## [1] &quot;地址种类_woe&quot;           &quot;app1_woe&quot;               &quot;下单与付款时间间隔_woe&quot;
+## [4] &quot;cod运费_woe&quot;            &quot;原始来单金额_woe&quot;       &quot;付款到派送_woe&quot;        
+## [7] &quot;发货方式_woe&quot;           &quot;用户性别_woe&quot;           &quot;州_woe&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt_pred =<span class="st"> </span><span class="kw">predict</span>(m1, <span class="dt">type=</span><span class="st">&#39;response&#39;</span>, test_<span class="dv">1</span>)
+<span class="kw">perf_eva</span>(test_<span class="dv">1</span><span class="op">$</span>label, dt_pred, <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;ks&quot;</span>,<span class="st">&quot;lift&quot;</span>,<span class="st">&quot;roc&quot;</span>,<span class="st">&quot;pr&quot;</span>))</code></pre></div>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_path).</code></pre>
+<p><img src="CODPrediction_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<pre><code>## $KS
+## [1] 0.337
+## 
+## $AUC
+## [1] 0.7436
+## 
+## $Gini
+## [1] 0.4872
+## 
+## $pic
+## TableGrob (2 x 2) &quot;arrange&quot;: 4 grobs
+##       z     cells    name           grob
+## pks   1 (1-1,1-1) arrange gtable[layout]
+## plift 2 (1-1,2-2) arrange gtable[layout]
+## proc  3 (2-2,1-1) arrange gtable[layout]
+## ppr   4 (2-2,2-2) arrange gtable[layout]</code></pre>
+</div>
+<div id="section-5.2.2" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> 随即森林</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m3 &lt;-<span class="st"> </span><span class="kw">randomForest</span>(label <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> train_<span class="dv">1</span>)
+<span class="kw">par</span>(<span class="dt">family=</span><span class="st">&#39;STKaiti&#39;</span>)
+<span class="kw">varImpPlot</span>(m3, <span class="dt">main=</span><span class="st">&quot;Random Forest: Variable Importance&quot;</span>)</code></pre></div>
+<p><img src="CODPrediction_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt_pred =<span class="st"> </span><span class="kw">predict</span>(m3, <span class="dt">type=</span><span class="st">&#39;prob&#39;</span>, test_<span class="dv">1</span>)[,<span class="dv">1</span>]
+<span class="kw">perf_eva</span>(test_<span class="dv">1</span><span class="op">$</span>label, dt_pred, <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;ks&quot;</span>,<span class="st">&quot;lift&quot;</span>,<span class="st">&quot;roc&quot;</span>,<span class="st">&quot;pr&quot;</span>))</code></pre></div>
+<pre><code>## Warning: Removed 1 rows containing missing values (geom_path).</code></pre>
+<p><img src="CODPrediction_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<pre><code>## $KS
+## [1] 0.1644
+## 
+## $AUC
+## [1] 0.4067
+## 
+## $Gini
+## [1] -0.1866
+## 
+## $pic
+## TableGrob (2 x 2) &quot;arrange&quot;: 4 grobs
+##       z     cells    name           grob
+## pks   1 (1-1,1-1) arrange gtable[layout]
+## plift 2 (1-1,2-2) arrange gtable[layout]
+## proc  3 (2-2,1-1) arrange gtable[layout]
+## ppr   4 (2-2,2-2) arrange gtable[layout]</code></pre>
+<p>不平衡的数据会造成非常低AUC，需要尝试解决样本不平衡的问题</p>
+</div>
+<div id="section-5.2.3" class="section level3">
+<h3><span class="header-section-number">5.2.3</span> 欠抽样</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&#39;/Users/milin/COD\ 建模/model_rf_under.RData&#39;</span>)
+<span class="kw">load</span>(<span class="st">&#39;/Users/milin/COD\ 建模/dt_woe.RData&#39;</span>)
+<span class="kw">require</span>(scorecard)
+dt_pred =<span class="st"> </span><span class="kw">predict</span>(model_rf_under, <span class="dt">type =</span> <span class="st">&#39;prob&#39;</span>, dt_woe)
+
+
+<span class="kw">perf_eva</span>(dt_woe<span class="op">$</span>label, dt_pred<span class="op">$</span><span class="st">`</span><span class="dt">1</span><span class="st">`</span>)</code></pre></div>
+<p><img src="CODPrediction_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<pre><code>## $KS
+## [1] 0.3986
+## 
+## $AUC
+## [1] 0.7641
+## 
+## $Gini
+## [1] 0.5281
+## 
+## $pic
+## TableGrob (1 x 2) &quot;arrange&quot;: 2 grobs
+##      z     cells    name           grob
+## pks  1 (1-1,1-1) arrange gtable[layout]
+## proc 2 (1-1,2-2) arrange gtable[layout]</code></pre>
+<div id="section-5.2.3.1" class="section level4">
+<h4><span class="header-section-number">5.2.3.1</span> 重抽样</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&#39;/Users/milin/COD\ 建模/model_rf_under1.RData&#39;</span>)
+dt_pred =<span class="st"> </span><span class="kw">predict</span>(model_rf_under, <span class="dt">type =</span> <span class="st">&#39;prob&#39;</span>, dt_woe)
+
+
+<span class="kw">perf_eva</span>(dt_woe<span class="op">$</span>label, dt_pred<span class="op">$</span><span class="st">`</span><span class="dt">1</span><span class="st">`</span>)</code></pre></div>
+<p><img src="CODPrediction_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<pre><code>## $KS
+## [1] 0.3986
+## 
+## $AUC
+## [1] 0.7641
+## 
+## $Gini
+## [1] 0.5281
+## 
+## $pic
+## TableGrob (1 x 2) &quot;arrange&quot;: 2 grobs
+##      z     cells    name           grob
+## pks  1 (1-1,1-1) arrange gtable[layout]
+## proc 2 (1-1,2-2) arrange gtable[layout]</code></pre>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="-.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="-a-.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["CODPrediction.pdf", "CODPrediction.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

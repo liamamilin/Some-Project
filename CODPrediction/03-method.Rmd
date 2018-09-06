@@ -1,0 +1,71 @@
+# 多元数据分析 - 聚类，降维
+
+We describe our methods in this chapter.
+
+
+对变量的聚类可以讲含有相同信息的变量聚为同一个族类
+
+当我们有大量的变量的时候，这种方法可以很好的用于进行降维。同样可以用于降维的方法还有主成分分析和因子分析。
+```{r}
+Model_data1$app1 <- as.factor(Model_data1$app1)
+Model_data1$label <- as.factor(Model_data1$label)
+Model_data1$地址种类 <- as.factor(Model_data1$地址种类)
+Model_data1$发货方式 <- as.factor(Model_data1$发货方式)
+Model_data1$用户性别 <- as.factor(Model_data1$用户性别)
+Model_data1$州 <- as.factor(Model_data1$州)
+```
+
+```{r}
+factors <- sapply(Model_data1, is.factor)
+#subset Qualitative variables 
+vars_quali <- Model_data1 %>% select(names(Model_data1)[factors])
+#vars_quali$good_bad_21<-vars_quali$good_bad_21[drop=TRUE] # remove empty factors
+str(vars_quali)
+```
+
+```{r}
+#subset Quantitative variables 
+vars_quanti <- Model_data1 %>% select(names(Model_data1)[!factors])
+str(vars_quanti)
+```
+
+## 6 变量的层次聚类
+
+```{r}
+ 
+
+tree <- hclustvar(X.quanti=vars_quanti,X.quali=vars_quali)
+par(family='STKaiti')
+plot(tree, main="variable clustering")
+rect.hclust(tree, k=8,  border = 1:8)
+
+```
+
+```{r}
+summary(tree)
+# Phylogenetic trees
+# require library("ape")
+par(family='STKaiti')
+plot(as.phylo(tree), type = "fan",
+     tip.color = hsv(runif(15, 0.65,  0.95), 1, 1, 0.7),
+     edge.color = hsv(runif(10, 0.65, 0.75), 1, 1, 0.7), 
+     edge.width = runif(20,  0.5, 3), use.edge.length = TRUE, col = "gray80")
+summary.phylo(as.phylo(tree))
+```
+
+```{r}
+part<-cutreevar(tree,8)
+print(part)
+summary(part)
+```
+
+## 7 通过聚类选取部分变量
+```{r}
+# cod运费 
+# 付款到派送  
+# keep<- c(1,2,3,4,7,8,10,12)
+cdata_reduced_2 <- Model_data1 # %>% select(keep)
+str(cdata_reduced_2)
+```
+
+

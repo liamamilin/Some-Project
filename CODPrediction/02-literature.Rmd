@@ -1,0 +1,241 @@
+# 数据分析
+
+### 修改数据的类型
+```{r}
+Model_data$cod运费 <- as.numeric(Model_data$cod运费)
+Model_data$原始来单金额 <- as.numeric(Model_data$原始来单金额)
+Model_data$修改后金额 <- as.numeric(Model_data$修改后金额)
+Model_data$发货件数 <- as.numeric(Model_data$发货件数)
+Model_data$原始来单件数 <- as.numeric(Model_data$原始来单件数)
+Model_data$下单小时 <- as.numeric(Model_data$下单小时)
+Model_data$付款小时 <- as.numeric(Model_data$付款小时)
+Model_data$下单与付款时间间隔 <- as.numeric(Model_data$下单与付款时间间隔)
+Model_data$金额差异 <- as.numeric(Model_data$金额差异)
+Model_data$件数差异 <- as.numeric(Model_data$件数差异)
+Model_data$确认小时 <- as.numeric(Model_data$确认小时)
+Model_data$付款到派送 <- as.numeric(Model_data$付款到派送)
+```
+
+
+
+## 查看标签的比例
+```{r}
+pct(Model_data$label)
+```
+
+## 单变量分析
+
+WOE(Weight of Evidence):WOE显示了自变量对因变量的预测能力
+
+*WOE=ln(Distribution of Non-Events(Good)Distribution of Events(Bad))*
+
+其通过更基本的比率计算而来:
+
+*(Distribution of Good Credit Outcomes) / (Distribution of Bad Credit Outcomes)*
+
+Information Value(IV):
+
+信息值有利于通过变量的重要性进行筛选变量
+
+*IV=∑(%Non-Events - %Events)∗WOE*
+
+Efficiency:
+
+*Efficiency=Abs(%Non-Events - %Events)/2*
+
+###  发货方式  
+```{r}
+A1 <- gbpct(Model_data$发货方式)
+
+op1<-par(mfrow=c(1,2), new=TRUE)
+par(family='STKaiti')
+plot(as.factor(Model_data$发货方式), Model_data$label, 
+     ylab="Good-Bad", xlab="发货方式", 
+     main="发货方式对标签的影响")
+
+barplot(A1$WOE, col="brown", names.arg=c(A1$Levels), 
+        main="发货方式的WOE",
+        xlab="发货方式",
+        ylab="WOE"
+)
+```
+
+###  州 
+```{r,error=FALSE,error=FALSE}
+A1 <- gbpct(Model_data$州)
+
+op1<-par(mfrow=c(1,2), new=TRUE)
+par(family='STKaiti')
+plot(as.factor(Model_data$州), Model_data$label, 
+     ylab="Good-Bad", xlab="州", 
+     main="州对于标签的关系 ")
+
+
+```
+
+###  用户性别
+```{r}
+A1 <- gbpct(Model_data$用户性别)
+
+op1<-par(mfrow=c(1,2), new=TRUE)
+par(family='STKaiti')
+plot(as.factor(Model_data$用户性别), Model_data$label, 
+     ylab="Good-Bad", xlab="用户性别", 
+     main="用户性别对于标签的关系 ")
+
+barplot(A1$WOE, col="brown", names.arg=c(A1$Levels), 
+        main="用户性别的WOE",
+        xlab="用户性别",
+        ylab="WOE"
+)
+```
+###  用户设备  
+```{r}
+
+A1 <- gbpct(Model_data$用户设备)
+
+op1<-par(mfrow=c(1,2), new=TRUE)
+par(family='STKaiti')
+plot(as.factor(Model_data$用户设备), Model_data$label, 
+     ylab="Good-Bad", xlab="用户设备", 
+     main="用户设别与标签的关系")
+
+barplot(A1$WOE, col="brown", names.arg=c(A1$Levels), 
+        main="用户设备的WOE",
+        xlab="用户设备",
+        ylab="WOE"
+)
+```
+
+###  操作系统版本
+```{r}
+
+
+A1 <- gbpct(Model_data$app1)
+
+op1<-par(mfrow=c(1,2), new=TRUE)
+par(family='STKaiti')
+plot(as.factor(Model_data$app1), Model_data$label, 
+     ylab="Good-Bad", xlab="操作系统", 
+     main="操作系统版本与标签的关系 ")
+
+# barplot(A1$WOE, col="brown", names.arg=c(A1$Levels), 
+#         main="Score:Checking Shipping method Status",
+#         xlab="Category",
+#         ylab="WOE"
+# )
+```
+
+###  用户类别
+```{r}
+
+A1 <- gbpct(Model_data$用户类型)
+
+op1<-par(mfrow=c(1,2), new=TRUE)
+par(family='STKaiti')
+plot(as.factor(Model_data$用户类型), Model_data$label, 
+     ylab="Good-Bad", xlab="用户类型", 
+     main="用户类型与标签的关系")
+
+barplot(A1$WOE, col="brown", names.arg=c(A1$Levels), 
+        main="用户类型的WOE",
+        xlab="用户类型",
+        ylab="WOE"
+)
+```
+
+
+###  地址类型
+```{r}
+A1 <- gbpct(Model_data$地址种类)
+
+op1<-par(mfrow=c(1,2), new=TRUE)
+par(family='STKaiti')
+plot(as.factor(Model_data$地址种类), Model_data$label, 
+     ylab="Good-Bad", xlab="地址类型", 
+     main="地址类型与标签的关系")
+
+barplot(A1$WOE, col="brown", names.arg=c(A1$Levels), 
+        main="地址类型WOE",
+        xlab="地址类型",
+        ylab="WOE"
+)
+```
+
+###  下单时间(小时) 
+```{r}
+A1 <- gbpct(Model_data$下单小时)
+
+op1<-par(mfrow=c(1,2), new=TRUE)
+par(family='STKaiti')
+plot(as.factor(Model_data$下单小时), Model_data$label, 
+     ylab="Good-Bad", xlab="下单时间(小时)", 
+     main="下单时间(小时)与标签的关系 ")
+
+barplot(A1$WOE, col="brown", names.arg=c(A1$Levels), 
+        main="下单时间(小时)WOE",
+        xlab="下单时间(小时)",
+        ylab="WOE"
+)
+```
+
+###  付款时间(小时)
+```{r}
+
+A1 <- gbpct(Model_data$付款小时)
+
+op1<-par(mfrow=c(1,2), new=TRUE)
+par(family='STKaiti')
+plot(as.factor(Model_data$付款小时), Model_data$label, 
+     ylab="Good-Bad", xlab="付款时间(小时)", 
+     main="付款时间(小时)与标签的关系")
+
+barplot(A1$WOE, col="brown", names.arg=c(A1$Levels), 
+        main="付款时间(小时)WOE",
+        xlab="Category",
+        ylab="WOE"
+)
+```
+
+
+##  计算信息值(Information Value) 和 WOE (Weight of Evidence)
+```{r}
+kable(iv)
+
+bins
+```
+
+1. 下面这些变量是没有预测能力或者预测能力非常弱的一些变量 (IV< 2%), 因此可以直接将这些变量筛选掉
+
+```{r,message=FALSE}
+library(tidyverse)
+kable(iv %>% filter(info_value<0.02))
+```
+
+2. 下面这一部分变量只是有非常弱的预测变量 (2%<=IV< 10%), 因此可以考虑加上这一部分变量，也可以不加上这些变量
+
+```{r,message=FALSE}
+library(tidyverse)
+kable(iv %>% filter(info_value>=0.02,info_value<0.1))
+```
+
+3. 这些变量有一定的预测能力 (10%<=IV< 30%), 可以考虑选取其中一些变量加入到模型里面去
+
+```{r,message=FALSE}
+library(tidyverse)
+kable(iv %>% filter(info_value>=0.1,info_value<0.3))
+```
+
+4. 这些变量有比较强的预测能力 (IV 30% to 50%),模型选取这一部分变量进行建模
+```{r,message=FALSE}
+library(tidyverse)
+kable(iv %>% filter(info_value>=0.3,info_value<0.5))
+```
+
+
+选取进行建模的变量
+```{r}
+var_list_1 <- iv %>% filter(info_value>0.1) %>% select(variable) # 15 variables
+Model_data1 <- Model_data %>% select(var_list_1$variable,label) #12 variables
+head(Model_data1)
+```

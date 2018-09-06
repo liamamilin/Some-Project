@@ -1,0 +1,98 @@
+--- 
+title: "Cod Prediction"
+author: "Liam"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "关于货到付款支付方式的客户的拒收预测"
+---
+
+# 简介
+
+货到付款是一种是一种非常受用户青睐的支付方式，对于客户而言，货到付款更加安全，特别是对于一些电商不发达的的确，货到付款能够有效的打消用户对于网购的不信任。
+
+对于商家而言，货到付款这种支付方式不利于现金的流动，并且，有一部分人会在货到了之后不付款，也就是拒收。拒收的原因很多，很简单的就是不想要了。
+
+一般而言，货到付款的拒收率可以高达20%，这将造成很大的运营成本。因此，本文利用机器学习的方法，对用户是否回拒收进行预测。
+
+
+```{r include=FALSE,}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+# 添加相关的包
+load('/Users/milin/COD\ 建模/markdown.RData')
+library(scorecard)
+library(tidyverse)
+library(DT)          # For Data Tables
+library(lattice)     # The lattice add-on of Trellis graphics for R
+library(knitr)       # For Dynamic Report Generation in R 
+library(gplots)      # Various R Programming Tools for Plotting Data
+library(ggplot2)     # An Implementation of the Grammar of Graphics 
+library(ClustOfVar)  # Clustering of variables 
+library(ape)         # Analyses of Phylogenetics and Evolution (as.phylo) 
+library(Information) # Data Exploration with Information Theory (Weight-of-Evidence and Information Value)
+library(ROCR)        # Model Performance and ROC curve
+library(caret)       # Classification and Regression Training -  for any machine learning algorithms
+library(rpart)       # Recursive partitioning for classification, regression and survival trees
+library(rpart.utils) # Tools for parsing and manipulating rpart objects, including generating machine readable rules
+library(rpart.plot)  # Plot 'rpart' Models: An Enhanced Version of 'plot.rpart'
+library(randomForest)# Leo Breiman and Cutler's Random Forests for Classification and Regression 
+library(party)       # A computational toolbox for recursive partitioning - Conditional inference Trees
+library(bnlearn)     # Bayesian Network Structure Learning, Parameter Learning and Inference
+library(DAAG)        # Data Analysis and Graphics Data and Functions
+library(vcd)         # Visualizing Categorical Data
+library(kernlab)     # Support Vector Machine
+# Following libraries we have load for model 8 and model 9
+#library(neuralnet)  # Neural Network 
+#library(lars)   # For Least Angle Regression, Lasso and Forward Stagewise
+#library(glmnet) # Lasso and Elastic-Net Regularized Generalized Linear Models
+```
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+# 自定义函数
+# Function 1: Create function to calculate percent distribution for factors
+pct <- function(x){
+  tbl <- table(x)
+  tbl_pct <- cbind(tbl,round(prop.table(tbl)*100,2))
+  colnames(tbl_pct) <- c('Count','Percentage')
+  kable(tbl_pct)
+}
+
+# pct(cdata$good_bad_21)
+
+# Function 2: Own function to calculate IV, WOE and Eefficiency 
+gbpct <- function(x, y=Model_data$label){
+  mt <- as.matrix(table(as.factor(x), as.factor(y))) # x -> independent variable(vector), y->dependent variable(vector)
+  Total <- mt[,1] + mt[,2]                          # Total observations
+  Total_Pct <- round(Total/sum(mt)*100, 2)          # Total PCT
+  Bad_pct <- round((mt[,1]/sum(mt[,1]))*100, 2)     # PCT of BAd or event or response
+  Good_pct <- round((mt[,2]/sum(mt[,2]))*100, 2)   # PCT of Good or non-event
+  Bad_Rate <- round((mt[,1]/(mt[,1]+mt[,2]))*100, 2) # Bad rate or response rate
+  grp_score <- round((Good_pct/(Good_pct + Bad_pct))*10, 2) # score for each group
+  WOE <- round(log(Good_pct/Bad_pct)*10, 2)      # Weight of Evidence for each group
+  g_b_comp <- ifelse(mt[,1] == mt[,2], 0, 1)
+  IV <- ifelse(g_b_comp == 0, 0, (Good_pct - Bad_pct)*(WOE/10)) # Information value for each group
+  Efficiency <- abs(Good_pct - Bad_pct)/2                       # Efficiency for each group
+  otb<-as.data.frame(cbind(mt, Good_pct,  Bad_pct,  Total, 
+                           Total_Pct,  Bad_Rate, grp_score, 
+                           WOE, IV, Efficiency ))
+  otb$Names <- rownames(otb)
+  rownames(otb) <- NULL
+  otb[,c(12,2,1,3:11)] # return IV table
+}
+
+# Function 3: Normalize using Range
+
+normalize <- function(x) {
+  return((x - min(x)) / (max(x) - min(x)))
+}
+```
+
+  

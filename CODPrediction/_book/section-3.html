@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Cod Prediction</title>
+  <meta name="description" content="关于货到付款支付方式的客户的拒收预测">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Cod Prediction" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="关于货到付款支付方式的客户的拒收预测" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Cod Prediction" />
+  
+  <meta name="twitter:description" content="关于货到付款支付方式的客户的拒收预测" />
+  
+
+<meta name="author" content="Liam">
+
+
+<meta name="date" content="2018-09-06">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="section-2.html">
+<link rel="next" href="-.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 简介</a></li>
+<li class="chapter" data-level="2" data-path="section-2.html"><a href="section-2.html"><i class="fa fa-check"></i><b>2</b> 数据</a><ul>
+<li class="chapter" data-level="2.1" data-path="section-2.html"><a href="section-2.html#section-2.1"><i class="fa fa-check"></i><b>2.1</b> 初步了解数据</a></li>
+<li class="chapter" data-level="2.2" data-path="section-2.html"><a href="section-2.html#section-2.2"><i class="fa fa-check"></i><b>2.2</b> 查看数据的结构</a></li>
+<li class="chapter" data-level="2.3" data-path="section-2.html"><a href="section-2.html#section-2.3"><i class="fa fa-check"></i><b>2.3</b> 查看数据的基本信息</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="section-3.html"><a href="section-3.html"><i class="fa fa-check"></i><b>3</b> 数据分析</a><ul>
+<li class="chapter" data-level="3.0.1" data-path="section-3.html"><a href="section-3.html#section-3.0.1"><i class="fa fa-check"></i><b>3.0.1</b> 修改数据的类型</a></li>
+<li class="chapter" data-level="3.1" data-path="section-3.html"><a href="section-3.html#section-3.1"><i class="fa fa-check"></i><b>3.1</b> 查看标签的比例</a></li>
+<li class="chapter" data-level="3.2" data-path="section-3.html"><a href="section-3.html#section-3.2"><i class="fa fa-check"></i><b>3.2</b> 单变量分析</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="section-3.html"><a href="section-3.html#section-3.2.1"><i class="fa fa-check"></i><b>3.2.1</b> 发货方式</a></li>
+<li class="chapter" data-level="3.2.2" data-path="section-3.html"><a href="section-3.html#section-3.2.2"><i class="fa fa-check"></i><b>3.2.2</b> 州</a></li>
+<li class="chapter" data-level="3.2.3" data-path="section-3.html"><a href="section-3.html#section-3.2.3"><i class="fa fa-check"></i><b>3.2.3</b> 用户性别</a></li>
+<li class="chapter" data-level="3.2.4" data-path="section-3.html"><a href="section-3.html#section-3.2.4"><i class="fa fa-check"></i><b>3.2.4</b> 操作系统版本</a></li>
+<li class="chapter" data-level="3.2.5" data-path="section-3.html"><a href="section-3.html#section-3.2.5"><i class="fa fa-check"></i><b>3.2.5</b> 用户类别</a></li>
+<li class="chapter" data-level="3.2.6" data-path="section-3.html"><a href="section-3.html#section-3.2.6"><i class="fa fa-check"></i><b>3.2.6</b> 地址类型</a></li>
+<li class="chapter" data-level="3.2.7" data-path="section-3.html"><a href="section-3.html#section-3.2.7"><i class="fa fa-check"></i><b>3.2.7</b> 下单时间(小时)</a></li>
+<li class="chapter" data-level="3.2.8" data-path="section-3.html"><a href="section-3.html#section-3.2.8"><i class="fa fa-check"></i><b>3.2.8</b> 付款时间(小时)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="section-3.html"><a href="section-3.html#information-value--woe-weight-of-evidence"><i class="fa fa-check"></i><b>3.3</b> 计算信息值(Information Value) 和 WOE (Weight of Evidence)</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="-.html"><a href="-.html"><i class="fa fa-check"></i><b>4</b> 多元数据分析 - 聚类，降维</a><ul>
+<li class="chapter" data-level="4.1" data-path="-.html"><a href="-.html#section-4.1"><i class="fa fa-check"></i><b>4.1</b> 6 变量的层次聚类</a></li>
+<li class="chapter" data-level="4.2" data-path="-.html"><a href="-.html#section-4.2"><i class="fa fa-check"></i><b>4.2</b> 7 通过聚类选取部分变量</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="section-5.html"><a href="section-5.html"><i class="fa fa-check"></i><b>5</b> 建模</a><ul>
+<li class="chapter" data-level="5.1" data-path="section-5.html"><a href="section-5.html#section-5.1"><i class="fa fa-check"></i><b>5.1</b> 划分选来集合测试集合</a></li>
+<li class="chapter" data-level="5.2" data-path="section-5.html"><a href="section-5.html#section-5.2"><i class="fa fa-check"></i><b>5.2</b> 训练模型以及模型选择</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="section-5.html"><a href="section-5.html#section-5.2.1"><i class="fa fa-check"></i><b>5.2.1</b> 逻辑回归以及逐步回归</a></li>
+<li class="chapter" data-level="5.2.2" data-path="section-5.html"><a href="section-5.html#section-5.2.2"><i class="fa fa-check"></i><b>5.2.2</b> 随即森林</a></li>
+<li class="chapter" data-level="5.2.3" data-path="section-5.html"><a href="section-5.html#section-5.2.3"><i class="fa fa-check"></i><b>5.2.3</b> 欠抽样</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="-a-.html"><a href="-a-.html"><i class="fa fa-check"></i><b>6</b> 附录 A: 使用到的包</a><ul>
+<li class="chapter" data-level="6.1" data-path="-a-.html"><a href="-a-.html#librarylattice"><i class="fa fa-check"></i><b>6.1</b> library(lattice)</a></li>
+<li class="chapter" data-level="6.2" data-path="-a-.html"><a href="-a-.html#a.2-libraryknitr"><i class="fa fa-check"></i><b>6.2</b> A.2 library(knitr)</a></li>
+<li class="chapter" data-level="6.3" data-path="-a-.html"><a href="-a-.html#a.3-librarygplots"><i class="fa fa-check"></i><b>6.3</b> A.3 library(gplots)</a></li>
+<li class="chapter" data-level="6.4" data-path="-a-.html"><a href="-a-.html#a.4-libraryggplot2"><i class="fa fa-check"></i><b>6.4</b> A.4 library(ggplot2)</a></li>
+<li class="chapter" data-level="6.5" data-path="-a-.html"><a href="-a-.html#a.5-libraryclustofvar"><i class="fa fa-check"></i><b>6.5</b> A.5 library(ClustOfVar)</a></li>
+<li class="chapter" data-level="6.6" data-path="-a-.html"><a href="-a-.html#a.6-libraryape"><i class="fa fa-check"></i><b>6.6</b> A.6 library(ape)</a></li>
+<li class="chapter" data-level="6.7" data-path="-a-.html"><a href="-a-.html#a.7-libraryinformation"><i class="fa fa-check"></i><b>6.7</b> A.7 library(Information)</a></li>
+<li class="chapter" data-level="6.8" data-path="-a-.html"><a href="-a-.html#a.8-libraryrocr"><i class="fa fa-check"></i><b>6.8</b> A.8 library(ROCR)</a></li>
+<li class="chapter" data-level="6.9" data-path="-a-.html"><a href="-a-.html#a.9-librarycaret"><i class="fa fa-check"></i><b>6.9</b> A.9 library(caret)</a></li>
+<li class="chapter" data-level="6.10" data-path="-a-.html"><a href="-a-.html#a.10-libraryrpart"><i class="fa fa-check"></i><b>6.10</b> A.10 library(rpart)</a></li>
+<li class="chapter" data-level="6.11" data-path="-a-.html"><a href="-a-.html#a.10.1-libraryrpart.utils"><i class="fa fa-check"></i><b>6.11</b> A.10.1 library(rpart.utils)</a></li>
+<li class="chapter" data-level="6.12" data-path="-a-.html"><a href="-a-.html#a.10.2-libraryrpart.plot"><i class="fa fa-check"></i><b>6.12</b> A.10.2 library(rpart.plot)</a></li>
+<li class="chapter" data-level="6.13" data-path="-a-.html"><a href="-a-.html#a.11-libraryrandomforest"><i class="fa fa-check"></i><b>6.13</b> A.11 library(randomForest)</a></li>
+<li class="chapter" data-level="6.14" data-path="-a-.html"><a href="-a-.html#a.12-libraryparty"><i class="fa fa-check"></i><b>6.14</b> A.12 library(party)</a></li>
+<li class="chapter" data-level="6.15" data-path="-a-.html"><a href="-a-.html#a.13-librarybnlearn"><i class="fa fa-check"></i><b>6.15</b> A.13 library(bnlearn)</a></li>
+<li class="chapter" data-level="6.16" data-path="-a-.html"><a href="-a-.html#a.14-librarydaag"><i class="fa fa-check"></i><b>6.16</b> A.14 library(DAAG)</a></li>
+<li class="chapter" data-level="6.17" data-path="-a-.html"><a href="-a-.html#a.15-libraryvcd"><i class="fa fa-check"></i><b>6.17</b> A.15 library(vcd)</a></li>
+<li class="chapter" data-level="6.18" data-path="-a-.html"><a href="-a-.html#a.16-libraryneuralnet"><i class="fa fa-check"></i><b>6.18</b> A.16 library(neuralnet)</a></li>
+<li class="chapter" data-level="6.19" data-path="-a-.html"><a href="-a-.html#a.17-librarykernlab"><i class="fa fa-check"></i><b>6.19</b> A.17 library(kernlab)</a></li>
+<li class="chapter" data-level="6.20" data-path="-a-.html"><a href="-a-.html#a.18-libraryglmnet"><i class="fa fa-check"></i><b>6.20</b> A.18 library(glmnet)</a></li>
+<li class="chapter" data-level="6.21" data-path="-a-.html"><a href="-a-.html#a.19-librarylars"><i class="fa fa-check"></i><b>6.21</b> A.19 library(lars)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="e58f82e88083.html"><a href="e58f82e88083.html"><i class="fa fa-check"></i>参考</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Cod Prediction</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="section-3" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> 数据分析</h1>
+<div id="section-3.0.1" class="section level3">
+<h3><span class="header-section-number">3.0.1</span> 修改数据的类型</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Model_data<span class="op">$</span>cod运费 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(Model_data<span class="op">$</span>cod运费)
+Model_data<span class="op">$</span>原始来单金额 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(Model_data<span class="op">$</span>原始来单金额)
+Model_data<span class="op">$</span>修改后金额 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(Model_data<span class="op">$</span>修改后金额)
+Model_data<span class="op">$</span>发货件数 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(Model_data<span class="op">$</span>发货件数)
+Model_data<span class="op">$</span>原始来单件数 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(Model_data<span class="op">$</span>原始来单件数)
+Model_data<span class="op">$</span>下单小时 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(Model_data<span class="op">$</span>下单小时)
+Model_data<span class="op">$</span>付款小时 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(Model_data<span class="op">$</span>付款小时)
+Model_data<span class="op">$</span>下单与付款时间间隔 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(Model_data<span class="op">$</span>下单与付款时间间隔)
+Model_data<span class="op">$</span>金额差异 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(Model_data<span class="op">$</span>金额差异)
+Model_data<span class="op">$</span>件数差异 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(Model_data<span class="op">$</span>件数差异)
+Model_data<span class="op">$</span>确认小时 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(Model_data<span class="op">$</span>确认小时)
+Model_data<span class="op">$</span>付款到派送 &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(Model_data<span class="op">$</span>付款到派送)</code></pre></div>
+</div>
+<div id="section-3.1" class="section level2">
+<h2><span class="header-section-number">3.1</span> 查看标签的比例</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pct</span>(Model_data<span class="op">$</span>label)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Count</th>
+<th align="right">Percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td align="right">285297</td>
+<td align="right">88.41</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td align="right">37418</td>
+<td align="right">11.59</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="section-3.2" class="section level2">
+<h2><span class="header-section-number">3.2</span> 单变量分析</h2>
+<p>WOE(Weight of Evidence):WOE显示了自变量对因变量的预测能力</p>
+<p><em>WOE=ln(Distribution of Non-Events(Good)Distribution of Events(Bad))</em></p>
+<p>其通过更基本的比率计算而来:</p>
+<p><em>(Distribution of Good Credit Outcomes) / (Distribution of Bad Credit Outcomes)</em></p>
+<p>Information Value(IV):</p>
+<p>信息值有利于通过变量的重要性进行筛选变量</p>
+<p><em>IV=∑(%Non-Events - %Events)∗WOE</em></p>
+<p>Efficiency:</p>
+<p><em>Efficiency=Abs(%Non-Events - %Events)/2</em></p>
+<div id="section-3.2.1" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> 发货方式</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A1 &lt;-<span class="st"> </span><span class="kw">gbpct</span>(Model_data<span class="op">$</span>发货方式)
+
+op1&lt;-<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">new=</span><span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## Warning in par(mfrow = c(1, 2), new = TRUE): 不绘图就不能调用par(new=TRUE)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">family=</span><span class="st">&#39;STKaiti&#39;</span>)
+<span class="kw">plot</span>(<span class="kw">as.factor</span>(Model_data<span class="op">$</span>发货方式), Model_data<span class="op">$</span>label, 
+     <span class="dt">ylab=</span><span class="st">&quot;Good-Bad&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;发货方式&quot;</span>, 
+     <span class="dt">main=</span><span class="st">&quot;发货方式对标签的影响&quot;</span>)
+
+<span class="kw">barplot</span>(A1<span class="op">$</span>WOE, <span class="dt">col=</span><span class="st">&quot;brown&quot;</span>, <span class="dt">names.arg=</span><span class="kw">c</span>(A1<span class="op">$</span>Levels), 
+        <span class="dt">main=</span><span class="st">&quot;发货方式的WOE&quot;</span>,
+        <span class="dt">xlab=</span><span class="st">&quot;发货方式&quot;</span>,
+        <span class="dt">ylab=</span><span class="st">&quot;WOE&quot;</span>
+)</code></pre></div>
+<p><img src="CODPrediction_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="section-3.2.2" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> 州</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A1 &lt;-<span class="st"> </span><span class="kw">gbpct</span>(Model_data<span class="op">$</span>州)
+
+op1&lt;-<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">new=</span><span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## Warning in par(mfrow = c(1, 2), new = TRUE): 不绘图就不能调用par(new=TRUE)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">family=</span><span class="st">&#39;STKaiti&#39;</span>)
+<span class="kw">plot</span>(<span class="kw">as.factor</span>(Model_data<span class="op">$</span>州), Model_data<span class="op">$</span>label, 
+     <span class="dt">ylab=</span><span class="st">&quot;Good-Bad&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;州&quot;</span>, 
+     <span class="dt">main=</span><span class="st">&quot;州对于标签的关系 &quot;</span>)</code></pre></div>
+<p><img src="CODPrediction_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="section-3.2.3" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> 用户性别</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A1 &lt;-<span class="st"> </span><span class="kw">gbpct</span>(Model_data<span class="op">$</span>用户性别)
+
+op1&lt;-<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">new=</span><span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## Warning in par(mfrow = c(1, 2), new = TRUE): 不绘图就不能调用par(new=TRUE)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">family=</span><span class="st">&#39;STKaiti&#39;</span>)
+<span class="kw">plot</span>(<span class="kw">as.factor</span>(Model_data<span class="op">$</span>用户性别), Model_data<span class="op">$</span>label, 
+     <span class="dt">ylab=</span><span class="st">&quot;Good-Bad&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;用户性别&quot;</span>, 
+     <span class="dt">main=</span><span class="st">&quot;用户性别对于标签的关系 &quot;</span>)
+
+<span class="kw">barplot</span>(A1<span class="op">$</span>WOE, <span class="dt">col=</span><span class="st">&quot;brown&quot;</span>, <span class="dt">names.arg=</span><span class="kw">c</span>(A1<span class="op">$</span>Levels), 
+        <span class="dt">main=</span><span class="st">&quot;用户性别的WOE&quot;</span>,
+        <span class="dt">xlab=</span><span class="st">&quot;用户性别&quot;</span>,
+        <span class="dt">ylab=</span><span class="st">&quot;WOE&quot;</span>
+)</code></pre></div>
+<p><img src="CODPrediction_files/figure-html/unnamed-chunk-11-1.png" width="672" /> ### 用户设备</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A1 &lt;-<span class="st"> </span><span class="kw">gbpct</span>(Model_data<span class="op">$</span>用户设备)
+
+op1&lt;-<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">new=</span><span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## Warning in par(mfrow = c(1, 2), new = TRUE): 不绘图就不能调用par(new=TRUE)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">family=</span><span class="st">&#39;STKaiti&#39;</span>)
+<span class="kw">plot</span>(<span class="kw">as.factor</span>(Model_data<span class="op">$</span>用户设备), Model_data<span class="op">$</span>label, 
+     <span class="dt">ylab=</span><span class="st">&quot;Good-Bad&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;用户设备&quot;</span>, 
+     <span class="dt">main=</span><span class="st">&quot;用户设别与标签的关系&quot;</span>)
+
+<span class="kw">barplot</span>(A1<span class="op">$</span>WOE, <span class="dt">col=</span><span class="st">&quot;brown&quot;</span>, <span class="dt">names.arg=</span><span class="kw">c</span>(A1<span class="op">$</span>Levels), 
+        <span class="dt">main=</span><span class="st">&quot;用户设备的WOE&quot;</span>,
+        <span class="dt">xlab=</span><span class="st">&quot;用户设备&quot;</span>,
+        <span class="dt">ylab=</span><span class="st">&quot;WOE&quot;</span>
+)</code></pre></div>
+<p><img src="CODPrediction_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+<div id="section-3.2.4" class="section level3">
+<h3><span class="header-section-number">3.2.4</span> 操作系统版本</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A1 &lt;-<span class="st"> </span><span class="kw">gbpct</span>(Model_data<span class="op">$</span>app1)
+
+op1&lt;-<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">new=</span><span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## Warning in par(mfrow = c(1, 2), new = TRUE): 不绘图就不能调用par(new=TRUE)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">family=</span><span class="st">&#39;STKaiti&#39;</span>)
+<span class="kw">plot</span>(<span class="kw">as.factor</span>(Model_data<span class="op">$</span>app1), Model_data<span class="op">$</span>label, 
+     <span class="dt">ylab=</span><span class="st">&quot;Good-Bad&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;操作系统&quot;</span>, 
+     <span class="dt">main=</span><span class="st">&quot;操作系统版本与标签的关系 &quot;</span>)
+
+<span class="co"># barplot(A1$WOE, col=&quot;brown&quot;, names.arg=c(A1$Levels), </span>
+<span class="co">#         main=&quot;Score:Checking Shipping method Status&quot;,</span>
+<span class="co">#         xlab=&quot;Category&quot;,</span>
+<span class="co">#         ylab=&quot;WOE&quot;</span>
+<span class="co"># )</span></code></pre></div>
+<p><img src="CODPrediction_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
+<div id="section-3.2.5" class="section level3">
+<h3><span class="header-section-number">3.2.5</span> 用户类别</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A1 &lt;-<span class="st"> </span><span class="kw">gbpct</span>(Model_data<span class="op">$</span>用户类型)
+
+op1&lt;-<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">new=</span><span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## Warning in par(mfrow = c(1, 2), new = TRUE): 不绘图就不能调用par(new=TRUE)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">family=</span><span class="st">&#39;STKaiti&#39;</span>)
+<span class="kw">plot</span>(<span class="kw">as.factor</span>(Model_data<span class="op">$</span>用户类型), Model_data<span class="op">$</span>label, 
+     <span class="dt">ylab=</span><span class="st">&quot;Good-Bad&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;用户类型&quot;</span>, 
+     <span class="dt">main=</span><span class="st">&quot;用户类型与标签的关系&quot;</span>)
+
+<span class="kw">barplot</span>(A1<span class="op">$</span>WOE, <span class="dt">col=</span><span class="st">&quot;brown&quot;</span>, <span class="dt">names.arg=</span><span class="kw">c</span>(A1<span class="op">$</span>Levels), 
+        <span class="dt">main=</span><span class="st">&quot;用户类型的WOE&quot;</span>,
+        <span class="dt">xlab=</span><span class="st">&quot;用户类型&quot;</span>,
+        <span class="dt">ylab=</span><span class="st">&quot;WOE&quot;</span>
+)</code></pre></div>
+<p><img src="CODPrediction_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+</div>
+<div id="section-3.2.6" class="section level3">
+<h3><span class="header-section-number">3.2.6</span> 地址类型</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A1 &lt;-<span class="st"> </span><span class="kw">gbpct</span>(Model_data<span class="op">$</span>地址种类)
+
+op1&lt;-<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">new=</span><span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## Warning in par(mfrow = c(1, 2), new = TRUE): 不绘图就不能调用par(new=TRUE)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">family=</span><span class="st">&#39;STKaiti&#39;</span>)
+<span class="kw">plot</span>(<span class="kw">as.factor</span>(Model_data<span class="op">$</span>地址种类), Model_data<span class="op">$</span>label, 
+     <span class="dt">ylab=</span><span class="st">&quot;Good-Bad&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;地址类型&quot;</span>, 
+     <span class="dt">main=</span><span class="st">&quot;地址类型与标签的关系&quot;</span>)
+
+<span class="kw">barplot</span>(A1<span class="op">$</span>WOE, <span class="dt">col=</span><span class="st">&quot;brown&quot;</span>, <span class="dt">names.arg=</span><span class="kw">c</span>(A1<span class="op">$</span>Levels), 
+        <span class="dt">main=</span><span class="st">&quot;地址类型WOE&quot;</span>,
+        <span class="dt">xlab=</span><span class="st">&quot;地址类型&quot;</span>,
+        <span class="dt">ylab=</span><span class="st">&quot;WOE&quot;</span>
+)</code></pre></div>
+<p><img src="CODPrediction_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
+<div id="section-3.2.7" class="section level3">
+<h3><span class="header-section-number">3.2.7</span> 下单时间(小时)</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A1 &lt;-<span class="st"> </span><span class="kw">gbpct</span>(Model_data<span class="op">$</span>下单小时)
+
+op1&lt;-<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">new=</span><span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## Warning in par(mfrow = c(1, 2), new = TRUE): 不绘图就不能调用par(new=TRUE)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">family=</span><span class="st">&#39;STKaiti&#39;</span>)
+<span class="kw">plot</span>(<span class="kw">as.factor</span>(Model_data<span class="op">$</span>下单小时), Model_data<span class="op">$</span>label, 
+     <span class="dt">ylab=</span><span class="st">&quot;Good-Bad&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;下单时间(小时)&quot;</span>, 
+     <span class="dt">main=</span><span class="st">&quot;下单时间(小时)与标签的关系 &quot;</span>)
+
+<span class="kw">barplot</span>(A1<span class="op">$</span>WOE, <span class="dt">col=</span><span class="st">&quot;brown&quot;</span>, <span class="dt">names.arg=</span><span class="kw">c</span>(A1<span class="op">$</span>Levels), 
+        <span class="dt">main=</span><span class="st">&quot;下单时间(小时)WOE&quot;</span>,
+        <span class="dt">xlab=</span><span class="st">&quot;下单时间(小时)&quot;</span>,
+        <span class="dt">ylab=</span><span class="st">&quot;WOE&quot;</span>
+)</code></pre></div>
+<p><img src="CODPrediction_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+</div>
+<div id="section-3.2.8" class="section level3">
+<h3><span class="header-section-number">3.2.8</span> 付款时间(小时)</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A1 &lt;-<span class="st"> </span><span class="kw">gbpct</span>(Model_data<span class="op">$</span>付款小时)
+
+op1&lt;-<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">new=</span><span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## Warning in par(mfrow = c(1, 2), new = TRUE): 不绘图就不能调用par(new=TRUE)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">family=</span><span class="st">&#39;STKaiti&#39;</span>)
+<span class="kw">plot</span>(<span class="kw">as.factor</span>(Model_data<span class="op">$</span>付款小时), Model_data<span class="op">$</span>label, 
+     <span class="dt">ylab=</span><span class="st">&quot;Good-Bad&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;付款时间(小时)&quot;</span>, 
+     <span class="dt">main=</span><span class="st">&quot;付款时间(小时)与标签的关系&quot;</span>)
+
+<span class="kw">barplot</span>(A1<span class="op">$</span>WOE, <span class="dt">col=</span><span class="st">&quot;brown&quot;</span>, <span class="dt">names.arg=</span><span class="kw">c</span>(A1<span class="op">$</span>Levels), 
+        <span class="dt">main=</span><span class="st">&quot;付款时间(小时)WOE&quot;</span>,
+        <span class="dt">xlab=</span><span class="st">&quot;Category&quot;</span>,
+        <span class="dt">ylab=</span><span class="st">&quot;WOE&quot;</span>
+)</code></pre></div>
+<p><img src="CODPrediction_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+</div>
+<div id="information-value--woe-weight-of-evidence" class="section level2">
+<h2><span class="header-section-number">3.3</span> 计算信息值(Information Value) 和 WOE (Weight of Evidence)</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kable</span>(iv)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">variable</th>
+<th align="right">info_value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">地址种类</td>
+<td align="right">0.4482661</td>
+</tr>
+<tr class="even">
+<td align="left">app1</td>
+<td align="right">0.3126790</td>
+</tr>
+<tr class="odd">
+<td align="left">下单与付款时间间隔</td>
+<td align="right">0.2858385</td>
+</tr>
+<tr class="even">
+<td align="left">cod运费</td>
+<td align="right">0.2818102</td>
+</tr>
+<tr class="odd">
+<td align="left">修改后金额</td>
+<td align="right">0.1986989</td>
+</tr>
+<tr class="even">
+<td align="left">原始来单金额</td>
+<td align="right">0.1946768</td>
+</tr>
+<tr class="odd">
+<td align="left">金额差异</td>
+<td align="right">0.1632335</td>
+</tr>
+<tr class="even">
+<td align="left">付款到派送</td>
+<td align="right">0.1379788</td>
+</tr>
+<tr class="odd">
+<td align="left">发货方式</td>
+<td align="right">0.1256872</td>
+</tr>
+<tr class="even">
+<td align="left">用户性别</td>
+<td align="right">0.1238769</td>
+</tr>
+<tr class="odd">
+<td align="left">州</td>
+<td align="right">0.1158185</td>
+</tr>
+<tr class="even">
+<td align="left">发货件数</td>
+<td align="right">0.0954921</td>
+</tr>
+<tr class="odd">
+<td align="left">原始来单件数</td>
+<td align="right">0.0929052</td>
+</tr>
+<tr class="even">
+<td align="left">用户类型</td>
+<td align="right">0.0274259</td>
+</tr>
+<tr class="odd">
+<td align="left">确认小时</td>
+<td align="right">0.0205682</td>
+</tr>
+<tr class="even">
+<td align="left">用户设备</td>
+<td align="right">0.0140496</td>
+</tr>
+<tr class="odd">
+<td align="left">付款小时</td>
+<td align="right">0.0119562</td>
+</tr>
+<tr class="even">
+<td align="left">下单小时</td>
+<td align="right">0.0118502</td>
+</tr>
+<tr class="odd">
+<td align="left">件数差异</td>
+<td align="right">0.0073371</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bins</code></pre></div>
+<pre><code>## $发货方式
+##    variable                    bin  count count_distr   good   bad
+## 1: 发货方式 XpressBees%,%Delhivery 172229   0.5336876 156606 15623
+## 2: 发货方式                   Ecom 150486   0.4663124 128691 21795
+##       badprob        woe     bin_iv   total_iv                 breaks
+## 1: 0.09071062 -0.2736100 0.03595137 0.06954223 XpressBees%,%Delhivery
+## 2: 0.14483075  0.2556453 0.03359086 0.06954223                   Ecom
+##    is_special_values
+## 1:             FALSE
+## 2:             FALSE
+## 
+## $州
+##    variable
+## 1:       州
+## 2:       州
+## 3:       州
+## 4:       州
+##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  bin
+## 1: West bengal%,%UTTAR PRADESH%,%madhya pradesh%,%west bengal%,%Uttar pradesh%,%new delhi%,%New Delhi%,%andhra pradesh%,%maharashtra%,%WEST BENGAL%,%uttar pardesh%,%MADHYA PRADESH%,%palakkad%,%Kheda%,%haryana%,%Andhra pradesh%,%Maharashtara%,%Pondicherry%,%RAJSTHAN%,%Tamil nadu%,%Tamilnadu%,%Jammu &amp; Kashmir%,%J&amp;K%,%maharasta%,%Hyderabad%,%daman%,%GUJARAT%,%Haryana,%,%Jharkhan%,%Chattisgarh%,%karnataka%,%kerala%,%West Bangal%,%Meghalaya%,%Mizoram%,%Nagaland%,%Goa%,%Arunachal Pradesh%,%Assam%,%Daman and Diu%,%Puducherry%,%Kerala
+## 2:                                                                                                                                                                                                                                                                                                                                                                                                                                     West Bengal%,%Tamil Nadu%,%Chandigarh%,%Karnataka%,%Sikkim%,%Chhattisgarh%,%Himachal Pradesh%,%Andhra Pradesh
+## 3:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Telangana%,%Manipur%,%Odisha%,%Tripura%,%Gujarat%,%Uttarakhand
+## 4:                                                                                                                                                                                                                                                                                                                                                        Jammu and Kashmir%,%Haryana%,%Madhya Pradesh%,%Uttar Pradesh%,%Punjab%,%Rajasthan%,%Maharashtra%,%Jharkhand%,%Delhi%,%Bihar%,%punjab%,%Andaman and Nicobar Islands%,%tamil nadu%,%Hariyana
+##     count count_distr   good   bad    badprob         woe       bin_iv
+## 1:  21778  0.06748369  20513  1265 0.05808614 -0.75460784 0.0287454667
+## 2:  87476  0.27106270  80294  7182 0.08210252 -0.38273813 0.0342551910
+## 3:  62240  0.19286367  55233  7007 0.11258033 -0.03327208 0.0002107931
+## 4: 151221  0.46858993 129257 21964 0.14524438  0.25898095 0.0346850655
+##      total_iv
+## 1: 0.09789652
+## 2: 0.09789652
+## 3: 0.09789652
+## 4: 0.09789652
+##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               breaks
+## 1: West bengal%,%UTTAR PRADESH%,%madhya pradesh%,%west bengal%,%Uttar pradesh%,%new delhi%,%New Delhi%,%andhra pradesh%,%maharashtra%,%WEST BENGAL%,%uttar pardesh%,%MADHYA PRADESH%,%palakkad%,%Kheda%,%haryana%,%Andhra pradesh%,%Maharashtara%,%Pondicherry%,%RAJSTHAN%,%Tamil nadu%,%Tamilnadu%,%Jammu &amp; Kashmir%,%J&amp;K%,%maharasta%,%Hyderabad%,%daman%,%GUJARAT%,%Haryana,%,%Jharkhan%,%Chattisgarh%,%karnataka%,%kerala%,%West Bangal%,%Meghalaya%,%Mizoram%,%Nagaland%,%Goa%,%Arunachal Pradesh%,%Assam%,%Daman and Diu%,%Puducherry%,%Kerala
+## 2:                                                                                                                                                                                                                                                                                                                                                                                                                                     West Bengal%,%Tamil Nadu%,%Chandigarh%,%Karnataka%,%Sikkim%,%Chhattisgarh%,%Himachal Pradesh%,%Andhra Pradesh
+## 3:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Telangana%,%Manipur%,%Odisha%,%Tripura%,%Gujarat%,%Uttarakhand
+## 4:                                                                                                                                                                                                                                                                                                                                                        Jammu and Kashmir%,%Haryana%,%Madhya Pradesh%,%Uttar Pradesh%,%Punjab%,%Rajasthan%,%Maharashtra%,%Jharkhand%,%Delhi%,%Bihar%,%punjab%,%Andaman and Nicobar Islands%,%tamil nadu%,%Hariyana
+##    is_special_values
+## 1:             FALSE
+## 2:             FALSE
+## 3:             FALSE
+## 4:             FALSE
+## 
+## $原始来单金额
+##        variable       bin count count_distr  good   bad    badprob
+## 1: 原始来单金额  [-Inf,2) 20298  0.06289760 18324  1974 0.09725096
+## 2: 原始来单金额     [2,4) 82577  0.25588213 73354  9223 0.11168970
+## 3: 原始来单金额     [4,6) 43843  0.13585672 39918  3925 0.08952398
+## 4: 原始来单金额    [6,10) 55017  0.17048169 48312  6705 0.12187142
+## 5: 原始来单金额   [10,18) 72926  0.22597648 62305 10621 0.14564079
+## 6: 原始来单金额   [18,28) 29221  0.09054739 25891  3330 0.11395914
+## 7: 原始来单金额 [28, Inf) 18833  0.05835799 17193  1640 0.08708119
+##            woe       bin_iv   total_iv breaks is_special_values
+## 1: -0.19677086 0.0022574432 0.03578174      2             FALSE
+## 2: -0.04221780 0.0004487274 0.03578174      4             FALSE
+## 3: -0.28808213 0.0100890135 0.03578174      6             FALSE
+## 4:  0.05655241 0.0005571833 0.03578174     10             FALSE
+## 5:  0.26217036 0.0171619061 0.03578174     18             FALSE
+## 6: -0.01954424 0.0000343283 0.03578174     28             FALSE
+## 7: -0.31842721 0.0052331416 0.03578174    Inf             FALSE
+## 
+## $修改后金额
+##      variable       bin count count_distr  good   bad    badprob
+## 1: 修改后金额  [-Inf,2) 20384  0.06316409 18401  1983 0.09728218
+## 2: 修改后金额     [2,4) 83151  0.25766078 73874  9277 0.11156811
+## 3: 修改后金额     [4,6) 44200  0.13696295 40226  3974 0.08990950
+## 4: 修改后金额    [6,10) 56409  0.17479510 49630  6779 0.12017586
+## 5: 修改后金额   [10,18) 73848  0.22883349 63115 10733 0.14533907
+## 6: 修改后金额   [18,25) 23496  0.07280728 20784  2712 0.11542390
+## 7: 修改后金额 [25, Inf) 21227  0.06577630 19267  1960 0.09233523
+##             woe       bin_iv   total_iv breaks is_special_values
+## 1: -0.196415291 2.259132e-03 0.03378337      2             FALSE
+## 2: -0.043443850 4.782461e-04 0.03378337      4             FALSE
+## 3: -0.283361538 9.858532e-03 0.03378337      6             FALSE
+## 4:  0.040612980 2.928368e-04 0.03378337     10             FALSE
+## 5:  0.259743519 1.704306e-02 0.03378337     18             FALSE
+## 6: -0.005118219 1.903526e-06 0.03378337     25             FALSE
+## 7: -0.254070444 3.849656e-03 0.03378337    Inf             FALSE
+## 
+## $发货件数
+##    variable      bin  count count_distr   good   bad    badprob        woe
+## 1: 发货件数 [-Inf,2) 242394  0.75110856 210330 32064 0.13228050  0.1504351
+## 2: 发货件数    [2,3)  30017  0.09301396  27705  2312 0.07702302 -0.4521211
+## 3: 发货件数 [3, Inf)  50304  0.15587748  47262  3042 0.06047233 -0.7118125
+##        bin_iv   total_iv breaks is_special_values
+## 1: 0.01800438 0.09402303      2             FALSE
+## 2: 0.01596932 0.09402303      3             FALSE
+## 3: 0.06004934 0.09402303    Inf             FALSE
+## 
+## $原始来单件数
+##        variable      bin  count count_distr   good   bad    badprob
+## 1: 原始来单件数 [-Inf,2) 239614  0.74249415 207870 31744 0.13247974
+## 2: 原始来单件数    [2,3)  29493  0.09139024  27176  2317 0.07856101
+## 3: 原始来单件数 [3, Inf)  53608  0.16611561  50251  3357 0.06262125
+##           woe     bin_iv   total_iv breaks is_special_values
+## 1:  0.1521697 0.01822272 0.09087764      2             FALSE
+## 2: -0.4306821 0.01435595 0.09087764      3             FALSE
+## 3: -0.6746039 0.05829897 0.09087764    Inf             FALSE
+## 
+## $cod运费
+##    variable        bin  count count_distr   good   bad    badprob
+## 1:  cod运费 [-Inf,1.5) 143652   0.4451358 129995 13657 0.09507003
+## 2:  cod运费 [1.5, Inf) 179063   0.5548642 155302 23761 0.13269631
+##           woe     bin_iv   total_iv breaks is_special_values
+## 1: -0.2218649 0.02011498 0.03408191    1.5             FALSE
+## 2:  0.1540528 0.01396692 0.03408191    Inf             FALSE
+## 
+## $用户性别
+##    variable             bin  count count_distr   good   bad    badprob
+## 1: 用户性别         missing   1972 0.006110655   1694   278 0.14097363
+## 2: 用户性别 not set%,%women 228872 0.709207815 207855 21017 0.09182862
+## 3: 用户性别             men  91871 0.284681530  75748 16123 0.17549608
+##           woe       bin_iv  total_iv          breaks is_special_values
+## 1:  0.2241521 0.0003344142 0.1238244         missing              TRUE
+## 2: -0.2601302 0.0434092333 0.1238244 not set%,%women             FALSE
+## 3:  0.4842137 0.0800807579 0.1238244             men             FALSE
+## 
+## $用户设备
+##    variable               bin  count count_distr   good   bad    badprob
+## 1: 用户设备           missing   2467 0.007644516   2109   358 0.14511552
+## 2: 用户设备 pc%,%mobile%,%ios  35046 0.108597369  32068  2978 0.08497403
+## 3: 用户设备           android 285202 0.883758115 251120 34082 0.11950127
+##            woe       bin_iv   total_iv            breaks is_special_values
+## 1:  0.25794268 0.0005611005 0.01293809           missing              TRUE
+## 2: -0.34522784 0.0113285823 0.01293809 pc%,%mobile%,%ios             FALSE
+## 3:  0.03421734 0.0010484026 0.01293809           android             FALSE
+## 
+## $app1
+##    variable
+## 1:     app1
+## 2:     app1
+## 3:     app1
+## 4:     app1
+##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  bin
+## 1:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           missing
+## 2:                                                                                                                                                                                                                                                                                                               android_2.45%,%android_3.7.1%,%android_2.49%,%android_3.3.3%,%android_4.2.0%,%android_2.34%,%android_2.48%,%android_2.33%,%android_4.0.1%,%iOS_1.6.1%,%iOS_1.5.9%,%android_3.2.0%,%iOS_1.5.8%,%android_2.38%,%android_3.3.0%,%android_3.4.0%,%android_null%,%android_4.3.4%,%pc%,%android_4.3.5%,%iOS_1.6.2%,%android_4.0.2%,%android_4.3.3%,%iOS_1.9.1%,%iOS_2.0.0
+## 3:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             iOS_1.8.0%,%iOS_4.2.0
+## 4: iOS_2.0.1%,%android_4.3.0%,%iOS_1.7.0%,%iOS_2.1.0%,%iOS_1.9.0%,%android_3.6.2%,%android_3.7.3%,%android_4.2.1%,%iOS_4.0.0%,%android_4.3.2%,%android_3.8.0%,%android_3.4.3%,%android_3.2.1%,%android_3.9.1%,%android_3.3.1%,%android_3.8.1%,%android_4.0.3%,%android_3.1.1%,%android_3.5.5%,%iOS_4.1.0%,%android_3.4.2%,%android_3.4.1%,%android_4.1.1%,%android_4.2.3%,%android_4.1.0%,%android_3.9.0%,%mobile-pwa%,%iOS_1.6.0%,%mobile%,%android_3.0.2%,%android_3.5.2%,%android_2.42%,%android_3.6.1%,%android_3.0.1%,%android_4.2.2%,%android_3.7.0%,%android_4.0.0%,%android_3.5.1%,%android_4.3.1%,%android_2.44%,%android_2.50%,%android_2.40%,%android_2.46%,%android_2.47
+##     count count_distr   good   bad    badprob        woe       bin_iv
+## 1:   2467 0.007644516   2109   358 0.14511552  0.2579427 0.0005611005
+## 2:  95468 0.295827588  90854  4614 0.04833033 -0.9487798 0.1851491250
+## 3:  29467 0.091309670  27136  2331 0.07910544 -0.4231850 0.0138883801
+## 4: 195313 0.605218227 165198 30115 0.15418841  0.3292575 0.0743423496
+##    total_iv
+## 1: 0.273941
+## 2: 0.273941
+## 3: 0.273941
+## 4: 0.273941
+##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               breaks
+## 1:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           missing
+## 2:                                                                                                                                                                                                                                                                                                               android_2.45%,%android_3.7.1%,%android_2.49%,%android_3.3.3%,%android_4.2.0%,%android_2.34%,%android_2.48%,%android_2.33%,%android_4.0.1%,%iOS_1.6.1%,%iOS_1.5.9%,%android_3.2.0%,%iOS_1.5.8%,%android_2.38%,%android_3.3.0%,%android_3.4.0%,%android_null%,%android_4.3.4%,%pc%,%android_4.3.5%,%iOS_1.6.2%,%android_4.0.2%,%android_4.3.3%,%iOS_1.9.1%,%iOS_2.0.0
+## 3:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             iOS_1.8.0%,%iOS_4.2.0
+## 4: iOS_2.0.1%,%android_4.3.0%,%iOS_1.7.0%,%iOS_2.1.0%,%iOS_1.9.0%,%android_3.6.2%,%android_3.7.3%,%android_4.2.1%,%iOS_4.0.0%,%android_4.3.2%,%android_3.8.0%,%android_3.4.3%,%android_3.2.1%,%android_3.9.1%,%android_3.3.1%,%android_3.8.1%,%android_4.0.3%,%android_3.1.1%,%android_3.5.5%,%iOS_4.1.0%,%android_3.4.2%,%android_3.4.1%,%android_4.1.1%,%android_4.2.3%,%android_4.1.0%,%android_3.9.0%,%mobile-pwa%,%iOS_1.6.0%,%mobile%,%android_3.0.2%,%android_3.5.2%,%android_2.42%,%android_3.6.1%,%android_3.0.1%,%android_4.2.2%,%android_3.7.0%,%android_4.0.0%,%android_3.5.1%,%android_4.3.1%,%android_2.44%,%android_2.50%,%android_2.40%,%android_2.46%,%android_2.47
+##    is_special_values
+## 1:              TRUE
+## 2:             FALSE
+## 3:             FALSE
+## 4:             FALSE
+## 
+## $用户类型
+##    variable
+## 1: 用户类型
+## 2: 用户类型
+## 3: 用户类型
+##                                                                bin  count
+## 1: old_prepaid_old_cod%,%old_prepaid_new_cod%,%new_prepaid_old_cod  31057
+## 2:                                                         old_cod  47207
+## 3:                                   new_cod%,%new_prepaid_new_cod 244451
+##    count_distr   good   bad   badprob         woe      bin_iv   total_iv
+## 1:  0.09623662  28600  2457 0.0791126 -0.42308675 0.014631535 0.02626036
+## 2:  0.14628077  42704  4503 0.0953884 -0.21816988 0.006400987 0.02626036
+## 3:  0.75748261 213993 30458 0.1245976  0.08178425 0.005227836 0.02626036
+##                                                             breaks
+## 1: old_prepaid_old_cod%,%old_prepaid_new_cod%,%new_prepaid_old_cod
+## 2:                                                         old_cod
+## 3:                                   new_cod%,%new_prepaid_new_cod
+##    is_special_values
+## 1:             FALSE
+## 2:             FALSE
+## 3:             FALSE
+## 
+## $地址种类
+##    variable                                                 bin  count
+## 1: 地址种类                                             missing  32963
+## 2: 地址种类                                       Valid Address 211036
+## 3: 地址种类                            Missing Rooftop with POI  27599
+## 4: 地址种类 Missing Rooftop%,%Inappropriate%,%Incomplete%,%Junk  51117
+##    count_distr   good   bad     badprob         woe       bin_iv  total_iv
+## 1:  0.10214276  32836   127 0.003852805 -3.52371480 3.935990e-01 0.4450414
+## 2:  0.65393923 186341 24695 0.117017950  0.01040134 7.103135e-05 0.4450414
+## 3:  0.08552128  24204  3395 0.123011703  0.06716472 3.958573e-04 0.4450414
+## 4:  0.15839673  41916  9201 0.179998826  0.51502343 5.097554e-02 0.4450414
+##                                                 breaks is_special_values
+## 1:                                             missing              TRUE
+## 2:                                       Valid Address             FALSE
+## 3:                            Missing Rooftop with POI             FALSE
+## 4: Missing Rooftop%,%Inappropriate%,%Incomplete%,%Junk             FALSE
+## 
+## $下单小时
+##    variable       bin  count count_distr   good   bad   badprob
+## 1: 下单小时  [-Inf,5)  37569  0.11641541  32658  4911 0.1307195
+## 2: 下单小时    [5,17) 231021  0.71586694 205342 25679 0.1111544
+## 3: 下单小时   [17,19)  34948  0.10829370  30943  4005 0.1145988
+## 4: 下单小时 [19, Inf)  19177  0.05942395  16354  2823 0.1472076
+##            woe       bin_iv    total_iv breaks is_special_values
+## 1:  0.13676661 0.0022945074 0.008885842      5             FALSE
+## 2: -0.04762447 0.0015941915 0.008885842     17             FALSE
+## 3: -0.01322435 0.0000188428 0.008885842     19             FALSE
+## 4:  0.27470650 0.0049783008 0.008885842    Inf             FALSE
+## 
+## $付款小时
+##    variable       bin  count count_distr   good   bad   badprob
+## 1: 付款小时  [-Inf,5)  37095  0.11494662  32224  4871 0.1313115
+## 2: 付款小时    [5,17) 230946  0.71563454 205269 25677 0.1111818
+## 3: 付款小时   [17,19)  35187  0.10903429  31172  4015 0.1141046
+## 4: 付款小时 [19, Inf)  19487  0.06038455  16632  2855 0.1465079
+##            woe       bin_iv    total_iv breaks is_special_values
+## 1:  0.14196661 2.445947e-03 0.008901763      5             FALSE
+## 2: -0.04734679 1.575312e-03 0.008901763     17             FALSE
+## 3: -0.01810404 3.548894e-05 0.008901763     19             FALSE
+## 4:  0.26912216 4.845015e-03 0.008901763    Inf             FALSE
+## 
+## $下单与付款时间间隔
+##              variable               bin  count count_distr   good   bad
+## 1: 下单与付款时间间隔     [-Inf,-0.083)  38240   0.1184946  33125  5115
+## 2: 下单与付款时间间隔  [-0.083,-0.0814) 137899   0.4273089 120792 17107
+## 3: 下单与付款时间间隔 [-0.0814,-0.0774) 106184   0.3290334  94815 11369
+## 4: 下单与付款时间间隔    [-0.0774, Inf)  40392   0.1251631  36565  3827
+##       badprob         woe      bin_iv   total_iv  breaks is_special_values
+## 1: 0.13376046  0.16326799 0.003361988 0.01435376  -0.083             FALSE
+## 2: 0.12405456  0.07679655 0.002595418 0.01435376 -0.0814             FALSE
+## 3: 0.10706886 -0.08965840 0.002555278 0.01435376 -0.0774             FALSE
+## 4: 0.09474648 -0.22563142 0.005841080 0.01435376     Inf             FALSE
+## 
+## $金额差异
+##    variable         bin  count count_distr   good   bad   badprob woe
+## 1: 金额差异 [-Inf, Inf) 322715           1 285297 37418 0.1159475   0
+##    bin_iv total_iv breaks is_special_values
+## 1:      0        0    Inf             FALSE
+## 
+## $件数差异
+##    variable         bin  count count_distr   good   bad   badprob woe
+## 1: 件数差异 [-Inf, Inf) 322715           1 285297 37418 0.1159475   0
+##    bin_iv total_iv breaks is_special_values
+## 1:      0        0    Inf             FALSE
+## 
+## $确认小时
+##    variable       bin  count count_distr   good   bad    badprob
+## 1: 确认小时  [-Inf,5)  20463  0.06340889  18528  1935 0.09456091
+## 2: 确认小时    [5,12) 220152  0.68218707 193376 26776 0.12162506
+## 3: 确认小时   [12,13)  29449  0.09125389  26112  3337 0.11331454
+## 4: 确认小时 [13, Inf)  52651  0.16315015  47281  5370 0.10199236
+##            woe       bin_iv   total_iv breaks is_special_values
+## 1: -0.22779690 3.013701e-03 0.00832062      5             FALSE
+## 2:  0.05424835 2.049801e-03 0.00832062     12             FALSE
+## 3: -0.02594391 6.081242e-05 0.00832062     13             FALSE
+## 4: -0.14390174 3.196306e-03 0.00832062    Inf             FALSE
+## 
+## $付款到派送
+##      variable        bin  count count_distr   good   bad    badprob
+## 1: 付款到派送    missing   3441  0.01066266   1327  2114 0.61435629
+## 2: 付款到派送 [-Inf,0.2) 190833  0.59133601 168293 22540 0.11811374
+## 3: 付款到派送    [0.2,1)  81786  0.25343105  73034  8752 0.10701098
+## 4: 付款到派送    [1,1.4)  20867  0.06466077  18904  1963 0.09407198
+## 5: 付款到派送 [1.4, Inf)  25788  0.07990952  23739  2049 0.07945556
+##            woe       bin_iv  total_iv  breaks is_special_values
+## 1:  2.49704000 0.1294604871 0.1468417 missing              TRUE
+## 2:  0.02096387 0.0002619823 0.1468417     0.2             FALSE
+## 3: -0.09026397 0.0019943602 0.1468417       1             FALSE
+## 4: -0.23352075 0.0032224443 0.1468417     1.4             FALSE
+## 5: -0.41838853 0.0119024356 0.1468417     Inf             FALSE</code></pre>
+<ol style="list-style-type: decimal">
+<li>下面这些变量是没有预测能力或者预测能力非常弱的一些变量 (IV&lt; 2%), 因此可以直接将这些变量筛选掉</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">kable</span>(iv <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(info_value<span class="op">&lt;</span><span class="fl">0.02</span>))</code></pre></div>
+<pre><code>## Warning: package &#39;bindrcpp&#39; was built under R version 3.4.4</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">variable</th>
+<th align="right">info_value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">用户设备</td>
+<td align="right">0.0140496</td>
+</tr>
+<tr class="even">
+<td align="left">付款小时</td>
+<td align="right">0.0119562</td>
+</tr>
+<tr class="odd">
+<td align="left">下单小时</td>
+<td align="right">0.0118502</td>
+</tr>
+<tr class="even">
+<td align="left">件数差异</td>
+<td align="right">0.0073371</td>
+</tr>
+</tbody>
+</table>
+<ol start="2" style="list-style-type: decimal">
+<li>下面这一部分变量只是有非常弱的预测变量 (2%&lt;=IV&lt; 10%), 因此可以考虑加上这一部分变量，也可以不加上这些变量</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">kable</span>(iv <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(info_value<span class="op">&gt;=</span><span class="fl">0.02</span>,info_value<span class="op">&lt;</span><span class="fl">0.1</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">variable</th>
+<th align="right">info_value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">发货件数</td>
+<td align="right">0.0954921</td>
+</tr>
+<tr class="even">
+<td align="left">原始来单件数</td>
+<td align="right">0.0929052</td>
+</tr>
+<tr class="odd">
+<td align="left">用户类型</td>
+<td align="right">0.0274259</td>
+</tr>
+<tr class="even">
+<td align="left">确认小时</td>
+<td align="right">0.0205682</td>
+</tr>
+</tbody>
+</table>
+<ol start="3" style="list-style-type: decimal">
+<li>这些变量有一定的预测能力 (10%&lt;=IV&lt; 30%), 可以考虑选取其中一些变量加入到模型里面去</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">kable</span>(iv <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(info_value<span class="op">&gt;=</span><span class="fl">0.1</span>,info_value<span class="op">&lt;</span><span class="fl">0.3</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">variable</th>
+<th align="right">info_value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">下单与付款时间间隔</td>
+<td align="right">0.2858385</td>
+</tr>
+<tr class="even">
+<td align="left">cod运费</td>
+<td align="right">0.2818102</td>
+</tr>
+<tr class="odd">
+<td align="left">修改后金额</td>
+<td align="right">0.1986989</td>
+</tr>
+<tr class="even">
+<td align="left">原始来单金额</td>
+<td align="right">0.1946768</td>
+</tr>
+<tr class="odd">
+<td align="left">金额差异</td>
+<td align="right">0.1632335</td>
+</tr>
+<tr class="even">
+<td align="left">付款到派送</td>
+<td align="right">0.1379788</td>
+</tr>
+<tr class="odd">
+<td align="left">发货方式</td>
+<td align="right">0.1256872</td>
+</tr>
+<tr class="even">
+<td align="left">用户性别</td>
+<td align="right">0.1238769</td>
+</tr>
+<tr class="odd">
+<td align="left">州</td>
+<td align="right">0.1158185</td>
+</tr>
+</tbody>
+</table>
+<ol start="4" style="list-style-type: decimal">
+<li>这些变量有比较强的预测能力 (IV 30% to 50%),模型选取这一部分变量进行建模</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">kable</span>(iv <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(info_value<span class="op">&gt;=</span><span class="fl">0.3</span>,info_value<span class="op">&lt;</span><span class="fl">0.5</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">variable</th>
+<th align="right">info_value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">地址种类</td>
+<td align="right">0.4482661</td>
+</tr>
+<tr class="even">
+<td align="left">app1</td>
+<td align="right">0.3126790</td>
+</tr>
+</tbody>
+</table>
+<p>选取进行建模的变量</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">var_list_<span class="dv">1</span> &lt;-<span class="st"> </span>iv <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(info_value<span class="op">&gt;</span><span class="fl">0.1</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(variable) <span class="co"># 15 variables</span>
+Model_data1 &lt;-<span class="st"> </span>Model_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(var_list_<span class="dv">1</span><span class="op">$</span>variable,label) <span class="co">#12 variables</span>
+<span class="kw">head</span>(Model_data1)</code></pre></div>
+<pre><code>##           地址种类          app1 下单与付款时间间隔 cod运费 修改后金额
+## 1:   Valid Address     iOS_4.1.0           19.45732    1.55       5.60
+## 2:   Valid Address android_4.1.1           16.93115    1.55       6.92
+## 3: Missing Rooftop android_4.2.2           17.41311    1.55      10.32
+## 4:   Valid Address android_4.0.3           16.85653    1.55       4.67
+## 5: Missing Rooftop android_4.1.1           19.56840    1.55      10.26
+## 6:   Valid Address     iOS_4.1.0           16.91516    1.55      16.02
+##    原始来单金额 金额差异 付款到派送  发货方式 用户性别          州 label
+## 1:         5.60        0  2.7096488 Delhivery    women   Telangana     0
+## 2:         6.92        0 -0.4770722 Delhivery    women   Telangana     0
+## 3:        10.32        0 -0.1513002      Ecom      men Maharashtra     0
+## 4:         4.67        0 -0.1274765      Ecom    women Maharashtra     0
+## 5:        10.26        0 -0.1704649 Delhivery      men   Karnataka     0
+## 6:        16.02        0  0.2219836 Delhivery    women   Karnataka     0</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="section-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="-.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["CODPrediction.pdf", "CODPrediction.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
