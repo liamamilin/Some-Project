@@ -97,9 +97,9 @@ Train_Test <-
 
 # 4.训练模型 ------------------------------------------------------------------
 
-care 他训练模型 --------------------------------------------------------------------
+# care 他训练模型 --------------------------------------------------------------------
   
-  Caret_Model <- function(train, test, model, search = F) {
+ Caret_Model <- function(train, test, model, search = F) {
     require(caret)
     
     if (search == F) {
@@ -128,10 +128,11 @@ care 他训练模型 -----------------------------------------------------------
 # 5.训练模型mlr ---------------------------------------------------------------
 
 l <- mlr::listLearners()
+
 Mlr_Modle <- function(train,test,model){
   require(mlr)
-  tasktrain <- makeClassifTask(data = Train,target = "label")
-  tasktest <- makeClassifTask(data = Test,target = "label")
+  tasktrain <- makeClassifTask(data = train,target = "label")
+  tasktest <- makeClassifTask(data = test,target = "label")
   
   lnr <- makeLearner(cl = model,predict.type = 'prob')
   
