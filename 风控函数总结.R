@@ -54,7 +54,9 @@ IV_WOE <- function(Raw_data,
     bins <-  scorecard::woebin(Data, y = label)
     print(bins)
     dt_woe <- scorecard::woebin_ply(Data, bins)
-    return(list(dt_woe,bins,IV))
+     l <- list(dt_woe,bins,IV)
+    names(l) <- c("woe变换后的结果","woe变换的详细数据","总的IV值")
+    return(l)
   }
   if (Filter != 0) {
     N <- IV %>% filter(info_value > Filter) %>% select(variable)
