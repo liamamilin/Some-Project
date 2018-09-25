@@ -54,7 +54,7 @@ IV_WOE <- function(Raw_data,
     bins <-  scorecard::woebin(Data, y = label)
     print(bins)
     dt_woe <- scorecard::woebin_ply(Data, bins)
-    return(dt_woe)
+    return(list(dt_woe,bins,IV))
   }
   if (Filter != 0) {
     N <- IV %>% filter(info_value > Filter) %>% select(variable)
@@ -97,7 +97,7 @@ Train_Test <-
 
 # 4.训练模型 ------------------------------------------------------------------
 
-# care 他训练模型 --------------------------------------------------------------------
+# caret 他训练模型 --------------------------------------------------------------------
   
  Caret_Model <- function(train, test, model, search = F) {
     require(caret)
