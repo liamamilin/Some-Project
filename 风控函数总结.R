@@ -129,10 +129,10 @@ Train_Test <-
 
 l <- mlr::listLearners()
 
-Mlr_Modle <- function(train,test,model){
+Mlr_Modle <- function(Train,Test,model){
   require(mlr)
-  tasktrain <- makeClassifTask(data = train,target = "label")
-  tasktest <- makeClassifTask(data = test,target = "label")
+  tasktrain <- makeClassifTask(data = Train,target = "label")
+  tasktest <- makeClassifTask(data = Test,target = "label")
   
   lnr <- makeLearner(cl = model,predict.type = 'prob')
   
@@ -140,7 +140,7 @@ Mlr_Modle <- function(train,test,model){
   mdl <- mlr::train(lnr,tasktrain)
   prd <- predict(mdl,tasktest)
   require(scorecard)
-  perf_eva(test$label, prd$data$prob.2, type = c("ks", "lift", "roc", "pr"))
+  perf_eva(test$label, prd$data[,3], type = c("ks", "lift", "roc", "pr"))
 }
 
 
