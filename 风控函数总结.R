@@ -140,7 +140,7 @@ Mlr_Modle <- function(Train,Test,model){
   mdl <- mlr::train(lnr,tasktrain)
   prd <- predict(mdl,tasktest)
   require(scorecard)
-  perf_eva(test$label, prd$data[,3], type = c("ks", "lift", "roc", "pr"))
+  perf_eva(test$label, prd$data[,4], type = c("ks", "lift", "roc", "pr"))
 }
 
 
