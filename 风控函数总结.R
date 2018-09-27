@@ -138,11 +138,17 @@ Mlr_Modle <- function(Train,Test,model){
   
   lnr <- makeLearner(cl = model,predict.type = 'prob')
   
-  
+ a <- Sys.time()
+  print(paste("正在构建模型","构建的模型是:",model))
   mdl <- mlr::train(lnr,tasktrain)
+
+  print(paste("模型构建所花时间为：",Sys.time()-a,"秒"))
+  print("正在评估模型··································")
   prd <- predict(mdl,tasktest)
   require(scorecard)
   perf_eva(test$label, prd$data[,4], type = c("ks", "lift", "roc", "pr"))
+
 }
+
 
 
