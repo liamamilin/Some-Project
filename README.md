@@ -17,4 +17,9 @@
 
 
 
-![](https://github.com/liamamilin/Some-Project/issues/2#issue-1568495782)
+ ![](https://user-images.githubusercontent.com/24915545/216400196-1aa57901-4ac9-436e-9c14-ba0c272b4cc1.mp4)
+
+
+![](https://user-images.githubusercontent.com/24915545/216400280-ae76c35b-1a91-4753-84f9-6b3fab8d3fcf.mp4)
+
+![](https://user-images.githubusercontent.com/24915545/216400463-3cbc677e-878e-4e09-a35f-9961692febfb.mp4)
