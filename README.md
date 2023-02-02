@@ -9,3 +9,12 @@
 一般而言，货到付款的拒收率可以高达20%，这将造成很大的运营成本。因此，本文利用机器学习的方法，对用户是否回拒收进行预测。
 
 点击链接可以直接查看：https://bookdown.org/connect/#/apps/1713/access
+
+
+# AR Project
+
+<img width="827" alt="image" src="https://user-images.githubusercontent.com/24915545/216399181-73482181-eafa-4d2d-881a-177203f5793b.png">
+
+
+
+![](https://github.com/liamamilin/Some-Project/issues/2#issue-1568495782)
