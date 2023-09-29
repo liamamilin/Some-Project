@@ -1,0 +1,114 @@
+% Copyright (C) Will Robertson 2004. 
+%
+% Permission is given to freely distribute and modify 
+% this document provided attribution is given.
+
+\documentclass[12pt,article]{memoir}
+
+\begin{document}
+
+\chapter*{Basic font selection}
+
+This document is not about choosing different default fonts. It's simply about
+what you can do with what you've got. You shouldn't have to use these commands
+much. If you want to emphasise what you're saying, use the \verb|\emph{}|
+command. That should be all you need in prose.
+
+\section*{Font sizes}
+
+It's important to use these commands to choose your fontsize so that if you ever
+change the base font size of your document (with a class option), your larger
+things will scale appropriately:
+
+\begin{center}
+  \tiny tiny
+  \scriptsize scriptsize
+  \footnotesize footnotesize
+  \small small
+  \normalsize normalsize
+        
+  \large large
+  \Large Large
+  \LARGE LARGE
+  \huge huge
+  \Huge Huge
+\end{center}
+
+\section*{Matching alternate fonts}
+
+You may have noticed that I use a number of different fonts for things in this
+document. They are all part of the same super-family ``Computer Modern'', so
+they are designed to blend together nicely. See Table~\ref{tab:cm} for a list of
+every font you may possibly choose with default \LaTeX\ font-changing commands.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{@{}ccc@{\hspace{2em}}>{\ttfamily}c>{\ttfamily}c@{}}
+\toprule
+\multicolumn{3}{c}{Font description} & \multicolumn{2}{c}{\LaTeX\ command}\\
+\cmidrule(r){1-3}\cmidrule{4-5} Family & Series & Shape & \normalfont Closed &
+\normalfont Open\\
+\midrule Roman & Regular & Upright  & textrm & rmfamily \\
+& & \itshape Italic & textit & itshape \\
+& & \slshape Slanted & textsl & slshape  \\
+& & \scshape Small Caps & textsc & scshape \\
+& \bfseries Bold & \bfseries Upright & textbf & bfseries \\
+& & \bfseries  \itshape Italic & \multicolumn{2}{c}{\ttfamily\emph{bf \& it}} \\
+& & \bfseries  \slshape Slanted  & \multicolumn{2}{c}{\ttfamily\emph{bf \& sl}}
+\\
+\midrule
+\sffamily San Serif & \sffamily Regular & \sffamily Upright & textsf & sffamily
+\\
+& & \sffamily \slshape Slanted  & \multicolumn{2}{c}{\ttfamily\emph{sf \& sl}}\\
+& \sffamily \bfseries Bold & \sffamily \bfseries Upright 
+&\multicolumn{2}{c}{\ttfamily\emph{sf \& bf}} \\
+\midrule
+\ttfamily Typewriter & \ttfamily Regular & \ttfamily Upright & texttt & ttfamily
+\\
+& & \ttfamily \itshape Italic  &\multicolumn{2}{c}{\ttfamily\emph{tt \& it}} \\
+& & \ttfamily \slshape Slanted  & \multicolumn{2}{c}{\ttfamily\emph{tt \& sl}}
+\\
+& & \ttfamily \scshape Small Caps  & \multicolumn{2}{c}{\ttfamily\emph{tt \&
+sc}} \\
+\bottomrule
+\end{tabular}
+\caption{The Computer Modern font families. Italics are abbreviations meaning
+combinations of commands given above them.}
+\label{tab:cm}
+\end{table}
+
+There are two forms of font-choosing commands. The first is as I've used in the
+source for Table~\ref{tab:cm}: \verb|{\slshape slanted}| to typeset {\slshape
+slanted} (more often known as oblique); \verb|{\bfseries bold}| to typeset
+{\bfseries bold}; etc.
+
+The other method is for changing short amounts of text at a time, and the
+commands are less complex than those above. \verb|\textsf{sans serif}| will
+result in \textsf{sans serif}; \verb|\textsc{Small Caps}| will give
+\textsc{Small Caps}; etc. \emph{This method is preferred,} because it
+automatically takes into account `italic correction'. Italic correction is a
+property of the font that corrects the spacing around a glyph that sticks out a
+lot. You will rarely have to use it manually, but there are two examples shown
+in Table~\ref{tab:itcorr}.
+
+\begin{table}
+  \centering
+  \begin{tabular}{lc}
+    \toprule
+    Source & Output \\
+    \midrule
+    \verb|\textit{half}life| & \textit{half}life \\
+    \verb|{\itshape half}life| & {\itshape half}life \\
+    \verb|{\itshape half\/}life| & {\itshape half\/}life \\
+    \midrule
+    \verb|`\textbf{f}'| & `\textbf{f}' \\
+    \verb|`{\bfseries f}'| & `{\bfseries f}' \\
+    \verb|`{\bfseries f\/}'| & `{\bfseries f\/}' \\
+    \bottomrule
+  \end{tabular}
+  \caption{Two examples demonstrating `italic correction'. Note that it's not only for italics!}
+  \label{tab:itcorr}
+\end{table}
+
+
+\end{document}

@@ -1,0 +1,38 @@
+% Copyright (C) Will Robertson 2004. 
+%
+% Permission is given to freely distribute and modify 
+% this document provided attribution is given.
+
+\documentclass[fontsize=12pt, paper=a4]{scrlttr2}
+% Paper options are basically "letter" or "a4". Note the difference to the standard "a4paper"!
+
+\setkomavar{fromname}{MY Name}
+\setkomavar{fromaddress}{My address \\ is where \\ I live, AUST}
+\setkomavar{fromemail}{user@domain.org}
+\setkomavar{fromphone}{+61 09 123 4567}
+\setkomavar{signature}{My full name\\{\small my title maybe}}
+
+\renewcommand{\raggedsignature}{\raggedright} % make the signature ragged right
+
+% There are 31 variables you can set in total!
+% Look in the guide for a list of them all.
+
+\setkomavar{subject}{A simple example of \textsf{scrlttr2}} 
+
+\begin{document}
+
+\begin{letter}{Your Name \\ His/her \\ Mailing \\ Address, USA} 
+
+\opening{Hello,} 
+
+This is a simple example of the \textsf{scrlttr2} class for writing letters. It is very customisable and contains many many more features than the regular \textsf{letter} class. Note things like fold marks in the left margin. Please read the KOMA-Script documentation (in English: \texttt{scrguien.pdf}) if you want to learn the details of this class.
+
+This template is for the people who say ``oh, \TeX\ is clearly good for long reports and stuff, but writing a letter's heaps easier in Word''. I hope you'll agree the time saved \emph{not} setting up margins and indents, \textsl{ad nauseum} every time you need to write a letter, more than tips to balance in \LaTeX's favour.
+
+\closing{Sincerely,}
+
+\ps{PS There's \emph{heaps} more to this class than this document shows!}
+
+\end{letter}
+
+\end{document}

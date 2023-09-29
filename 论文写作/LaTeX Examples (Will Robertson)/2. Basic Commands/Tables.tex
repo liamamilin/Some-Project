@@ -1,0 +1,136 @@
+% Copyright (C) Will Robertson 2004. 
+%
+% Permission is given to freely distribute and modify 
+% this document provided attribution is given.
+
+\documentclass[article,oneside]{memoir}
+
+\usepackage{hyperref}
+\pagestyle{empty}
+
+\begin{document}
+
+\chapter*{Tables}
+
+To typeset tables you really want the \textsf{booktabs} package, which is incorporated within the \textsf{memoir} class. This package has been designed with the goal of book-quality output---the manual contains an excellent introduction on the technicalities of table layout. First and foremost is the mantra ``never use vertical lines in tables''. See \href{http://www.tug.org/tex-archive/macros/latex/contrib/booktabs/booktabs.pdf}{the \textsf{booktabs} manual} for full details.
+
+To illustrate tables, I'm simply going to typeset a bunch of examples, each showing different table features. Tables are generally put in floats, which are dealt with more in the \texttt{floats-and-referencing} example document.
+
+\section*{Basics}
+
+One way to set tables is with the \verb|\begin{tabular}...\end{tabular}| environment. The first thing that must be defined in this environment is the number of columns and how they are aligned. For every column, the \emph{column spec} sets how the column will behave. For example, the spec \verb|{lcr}| would define three columns, the first of which was aligned left, the second is centred and the third is aligned right. See Table~\ref{tab:basic-align} for this example. Column widths expand to fit.
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{llcr} % column spec
+    \toprule
+    description & left & centered & right\\
+    \midrule
+    column spec & \texttt{l} & \texttt{c} & \texttt{r} \\
+    \midrule
+    example & left & center & right \\
+    \bottomrule
+  \end{tabular}
+  \caption{Basic column alignment}
+  \label{tab:basic-align}
+\end{table}
+
+The other type of column formatting is by fixing the width and letting the text reflow in the table cells. If you want to align the text in these columns, you'll have to wait until the end to find out how. Look at Table~\ref{tab:par-col} for a demonstration of these paragraph columns.
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{lb{7em}m{7em}p{7em}} % column spec
+    \toprule
+    description & top & vertical center & bottom\\
+    \midrule
+    column spec & \verb|b{7em}| & \verb|m{7em}| & \verb|p{7em}| \\
+    \midrule
+    example &%
+    fixed width in which text will wrap. &%
+    fixed width in which text will wrap. &%
+    fixed width in which text will wrap. \\
+    \bottomrule
+  \end{tabular}
+  \caption{Paragraph columns}
+  \label{tab:par-col}
+\end{table}
+
+It is very common to combine cells horizontally for table headings, etc. This is possible with the \verb|multicolumn{<number of cells>}{<column spec>}{<text>}| command. With the multi-column cell also comes the multi-column rule, \verb|\cmidrule{<start col>-<end col>}|. See Table~\ref{tab:multi-column} for how these look.
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{llcr} % column spec
+    \toprule
+    & \multicolumn{3}{c}{Column Type}\\
+    \cmidrule{2-4}
+    description & left & centered & right\\
+    spec & \texttt{l} & \texttt{c} & \texttt{r} \\
+    example & left & center & right \\
+    \bottomrule
+  \end{tabular}
+  \caption{Multi-column cells and rules}
+  \label{tab:multi-column}
+\end{table}
+
+Now we know the basics, I'm going to start making the tables look even better. Notice in all the tables up until now that there's been a bit of extra space hanging off the ends? The \verb|@{}| command in the column spec will remove inter-column space and insert whatever's in the brackets. Well, we want to eliminate the end space, so we will just surround our column spec with these: \verb|{@{}llcr@{}}|. This is shown in Table~\ref{tab:trim}. We'll also trim the multi-column rule (\verb|(lr)|: the optional \verb|l| trims the left and the optional \verb|r| trims the right), since at the moment it's a little asymmetric.
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{@{}llcr@{}} % column spec
+  % @{} suppresses space and inserts whatever's in the brackets. We want nothing!
+    \toprule
+    & \multicolumn{3}{c}{Column Type}\\
+    \cmidrule(l){2-4} % (l) does the trimming. Put an `r' in there to trim the right, but not in this case!
+    description & left & centered & right\\
+    spec & \texttt{l} & \texttt{c} & \texttt{r} \\
+    example & left & center & right \\
+    \bottomrule
+  \end{tabular}
+  \caption{Trimmed rule edges. Compare with Table~\ref{tab:multi-column}. Much nicer.}
+  \label{tab:trim}
+\end{table}
+
+There are some more things we can put into the column spec.\footnote{If you're not using \textsf{memoir}, you'll need the \textsf{array} package} \verb|>{}| will append every cell of that column with whatever's in the curlies; \verb|<{}| will prepend. These are useful for specifying column formatting. Have a look in Table~\ref{tab:col-format} to see how I made the left hand column set in an italic font.
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{@{}>{\itshape}llcr@{}} % column spec
+  % @{} suppresses space and inserts whatever's in the brackets. We want nothing!
+    \toprule
+    & \multicolumn{3}{c}{Column Type}\\
+    \cmidrule(l){2-4} % (l) does the trimming. Put an `r' in there to trim the right, but not in this case!
+    description & left & centered & right\\
+    spec & \texttt{l} & \texttt{c} & \texttt{r} \\
+    example & left & center & right \\
+    \bottomrule
+  \end{tabular}
+  \caption{Column formatting.}
+  \label{tab:col-format}
+\end{table}
+
+Finally, don't you think our column spec is getting a bit cluttered? In Table~\ref{tab:col-format} it looks like \verb|{@{}>{\itshape}llcr@{}}|. Pretty long and bloated for a four column table. It is possible to create our own to clear things up a whole lot. Let's define \verb|x| to stand for trimmed space, \verb|i| to stand for ``make the next column italic'', and \verb|M| to stand for a centred maths column. Have a look in the source (after this paragraph, but usually it'd be put in the preamble) to see how this is done. Now all we need is \verb|{x M il lcr X}|, which makes a lot more sense.
+
+\newcolumntype{x}{@{}}
+\newcolumntype{M}{>{$}c<{$}}
+\newcolumntype{i}{>{\itshape}}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{x M il lcr x} % column spec (yes, spaces are allowed!)
+  % @{} suppresses space and inserts whatever's in the brackets. We want nothing!
+    \toprule
+    \mathcal{MATHS} & Italic words & \multicolumn{3}{c}{Column type}\\
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}\cmidrule(l){3-5} % (l) does the trimming. Put an `r' in there to trim the right, but not in this case!
+    \tau & description & left & centered & right\\
+    \epsilon & spec & \texttt{l} & \texttt{c} & \texttt{r} \\
+    \chi & example & left & center & right \\
+    \bottomrule
+  \end{tabular}
+  \caption{New column types.}
+  \label{tab:col-format}
+\end{table}
+
+This has just scratched the surface of what you can do with tables in the \textsf{memoir} class and \LaTeX\ in general. Now you know enough to at least be able to produce good looking tables under almost all conditions---even if you need to look up some documentation to work out how to print a table over multiple pages.
+
+\end{document}
+

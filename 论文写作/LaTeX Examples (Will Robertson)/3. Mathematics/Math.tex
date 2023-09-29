@@ -1,0 +1,69 @@
+% Copyright (C) Will Robertson 2004. 
+%
+% Permission is given to freely distribute and modify 
+% this document provided attribution is given.
+
+\documentclass[12pt,article,fleqn]{memoir}
+\usepackage{amsmath}
+\usepackage{bm}
+\begin{document}
+
+\chapter*{Mathematics in \LaTeX}
+
+\TeX\ was written with math as a speciality. Mathematics can be displayed in two forms: inline and block (or display). Math mode uses a different font (similar to the text italic) with totally different spacing between its characters. Within a paragraph, math mode is entered surrounded with dollar signs. For example, \verb|$x^2 + y^2 = z^2$| will display $x^2 + y^2 = z^2$. As you can see, simple math is very easy.
+
+The other way to display math is in block mode. Unfortunately, there are many not-necessarily-consistent environments for doing this, and often the older/uglier methods are given as examples before the newer, more convenient ones. My rule-of-thumb: always use the \textsf{amsmath} package, and always use the \texttt{align} environment. My reasoning: you can do anything with the \texttt{align} environment combined with the \texttt{split} environment---all other environments provide either the same or lesser functionality.\footnote{With one notable exception (of which I know): there is no way to right align a single line, as in the \texttt{multline} env.} See the second math example document for full demonstrations of those two environments.
+
+That said, the \verb|\[...\]| environment is a nice shorthand, which allows a single line of displayed math without an equation number.
+
+\section*{Basics}
+
+All of these will work in inline mode also, sometimes with different spacing. c.f. $\frac AB$ with the fraction example below.
+\[
+\text{Subscripts and superscripts:} \quad x^y + y_z + a^{b+c} + d_{e +f} + j^k_l
+%  \quad gives you one em of horizontal space. \qquad gives two.
+\]
+%
+\[
+\text{Fractions:} \quad \frac A B \quad \frac{A \times B}{C \times D}
+\]
+%
+(Note the multiplication symbol: $\times = {}$\verb|\times|)
+%
+\[
+\text{Brackets:} \quad f\{x\} = x\cdot(y+z) = [x\cdot y+x\cdot z]
+\]
+%
+Preceded with the \verb|\left| and \verb|\right| commands, delimiters---$(),[],\{\},|,$ etc.---are resized automatically to best fit:
+\[
+\text{Large brackets:} \left(\sum^n_{i=0} \left\{\frac{x_i}{y_i}\right\}\right)
+\]
+%
+\[
+\text{Greek letters:} \quad \alpha \beta \gamma \cdots \chi \psi \omega \quad \Gamma \Delta \Theta \Lambda \Xi \Pi \Sigma \Phi \Psi \Omega
+% only the uppercase greek letters than look different than roman characters are included, unfortunately
+\]
+%
+\[
+\text{Integrals:} \quad \int^\infty_0 x\,\mathrm{d}x , \quad \iint xy\,\mathrm{d}A , \quad \iiint xyz\,\mathrm{d}V
+% Note the small amount of space inserted with \, (that's "backslash comma")
+\]
+%
+\verb|\mathrm{d}| is used to change the font of the `d' symbol to upright roman, which is proper for this case because it is not a variable. Notice how limits on the integrals are simply sub- and super-scripts.
+%
+\[
+\text{Derivatives:} \quad \frac{\mathrm{d}y}{\mathrm{d}x} , \quad \frac{\partial y}{\partial x}
+\]
+%
+\[
+\text{Other functions:} \quad \sin(n\pi) \quad \sqrt{x+y} \quad \lim_{x\rightarrow 0} x \quad \sum^n_{i=0} x_i
+\]
+
+There is a huge amount that can be done in math mode, and this document is only the most brief of introductions. Refer to Herbert Voss's \texttt{mathmode.pdf} for a very comprehensive reference, as well as the \textsf{amsmath} documentation and the various beginners guides.
+
+For the definitive reference of symbols that you can use, refer to ``The Comprehensive \LaTeX\ Symbol List''. You can get it from:\\
+\verb|http://www.ctan.org/tex-archive/info/symbols/comprehensive/|
+
+The next example math document illustrates the \texttt{align} and \texttt{split} environments, followed by a document on arrays and matrices.
+
+\end{document}

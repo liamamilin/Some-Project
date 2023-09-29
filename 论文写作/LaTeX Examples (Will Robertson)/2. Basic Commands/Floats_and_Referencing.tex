@@ -1,0 +1,65 @@
+% Copyright (C) Will Robertson 2004. 
+%
+% Permission is given to freely distribute and modify 
+% this document provided attribution is given.
+
+\documentclass[12pt,article]{memoir}
+
+\usepackage{hyperref}
+\pagestyle{empty}
+
+\begin{document}
+
+\chapter{Floats \& Referencing}
+
+This is required reading before you go on to learn about putting both figures (or graphics) and tables into your documents. That is because you go about both in the same way. Placing floats environments is one of the trickier aspects to using WYSIWYG document editors; how are you supposed to decide where they go in order to fit around the text in the best manner? In \LaTeX\, you don't need to worry. It'll do all the hard work for you.
+
+\section{Referencing}
+
+The first rule is to always refer to your tables and figures explicitly by reference rather than vague ``see the following...''. So, every table and figure you have will be numbered, and you can refer to them with the \verb|\ref| command. For example, Table~\ref{tab:basic-table} has the (user-defined) label \texttt{tab:basic-table}. To refer to it in my text, I simply type \verb|Table~\ref{tab:basic-table}|\footnotemark. The tilde (\verb|~|) is a non-breaking space. 
+
+\footnotetext{There are a few packages to help out with this process, but it's all mixed up and broken at the moment. For the curious, look at the \textsf{prettyref}, \textsf{varioref} and \textsf{fancyref} packages, but be warned: \textsf{fancyref} is what you want, but it is broken on download and also doesn't work with the \textsf{memoir} class!}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{lcr} % column alignments
+    \toprule
+    head 1 & head 2 & head 3\\
+    \midrule
+    left & centered & flush \\
+    aligned & middle & right \\
+    \bottomrule
+  \end{tabular}
+  \caption{Please see the example document on Tables for more!}
+  \label{tab:basic-table}
+\end{table}
+
+\LaTeX\ requires iteration to actually work out what the references are. You must therefore run your document through \LaTeX\ twice in order to get your numbers turn up---in their place, the first time around, you'll see a question mark. If you see a double question mark (??) that doesn't go away even after multiple compilations, your label is incorrect.
+
+\section{Floats}
+
+What floats actually \emph{do} is try their best to move around the document into a position that allows the text around it to flow as well as it can. We can see what a float is by taking the source to Table~\ref{tab:basic-table}. Everything between \verb|\begin{tabular}| and \verb|\end{tabular}| you can ignore---it's part of the table itself. See the example document on tables for more info in this regard. The code we have left is:
+
+\begin{verbatim}
+\begin{table}[htbp]
+  \centering
+  <<...tabular code...>>
+  \caption{...}
+  \label{tab:basic-table}
+\end{table}
+\end{verbatim}
+
+This is an example of the float used to contain tables. The other is functionally equivalent, but used for graphics instead: \verb|\begin{figure}...\end{figure}|.
+
+The \verb|[htbp]| part of the float code is how you're specifying where you would prefer \LaTeX\ to put your float. I'm going to let you work it out on your own\footnote{Okay, here's a hint: no other letters are allowed (although fewer are); h=here, t=top, b=bottom, p=page.} and suggest you simply use that which I have above.
+
+\section{Referencing \emph{again}}
+\label{sec:ref2}
+
+It is very highly recommended that you follow the naming scheme as above for your labels. Prefix the label with what the label is actually referring to. For example, if you have a figure of a tree label it something like \texttt{fig:tree} and if you have a table of logging statistics label it approximately \texttt{tab:timber}.
+
+You can also label chapters and sections, and equations and things like enumerations and footnotes, if you \emph{really} like referencing, I suppose. Anything with a number, really. To assign a label, use the \verb|\label| command immediately after the command that assigns the number. So right after the \verb|\chapter| command, for example. 
+
+Then, if I were referencing this part of this example document elsewhere, I could type \verb|\S\ref{sec:ref2}| and get ``\S\ref{sec:ref2}''.
+
+\end{document}

@@ -1,0 +1,62 @@
+% Copyright (C) Will Robertson 2004. 
+%
+% Permission is given to freely distribute and modify 
+% this document provided attribution is given.
+
+\documentclass[article]{memoir}
+
+\usepackage[utf8]{inputenc} % allow unicode characters in the source
+\pagestyle{empty} % no headers or footers
+
+\begin{document}
+
+\chapter*{Basic text input}
+
+This document covers the basic rules \TeX\ has for text input. Please see \texttt{lshort.pdf} (``The Not So Short Introduction to LaTeX'') for a more comprehensive introduction.
+
+\begin{itemize}
+
+\item	A blank line separates paragraphs.
+
+\item	Some characters cannot be input directly. Precede such characters with a backslash to print them. E.g.: 
+\~{}
+\#
+\$
+\%
+\^{}
+\&
+\_
+\$
+\{
+\}
+
+\item	Quotation marks must be typed in explicitly. This is no MS Word that tries to guess what you're typing! E.g. look at the source for the following sentence: ``It's difficult to type the word `discontinuous' correctly.''
+
+\item	Similarly, dashes and hyphens must also be typed according to context:
+	\begin{enumerate}
+	\tightlist
+	\item	For hyphenated words, use a hyphen (type one hyphen \texttt{-})\\
+	e.g. co-ordinate
+	\item	For ranges of numbers, use an en-dash (type two hyphens \texttt{--})\\
+	e.g. 13--18 months
+	\item	In a sentence, use an em-dash (type three hyphens \texttt{---})\\
+	e.g. ``Now wasn't I about to---where's he gone?''\\
+	or ``Don't---to quote a president---misunderestimate''
+	\item	To indicate letter omission, use \emph{two} em-dashes (\texttt{------})\\
+	e.g. ``Mr P------ lived in the town of Mt Q------''
+	\end{enumerate}
+	
+\item	You can type a non-breaking space with a tilde \texttt{\~}. Use this when you don't want a line to break between the words it separates; eg Mr~Knuth, Figure~1, etc\dots.
+
+\item	An ellipsis (\dots) is typed with \verb|\dots|. Use it before a period when finishing a trailing sentence. (See the previous dot point for an example.) 
+	
+\item	Originally, \TeX\ input was plain ASCII text. To get accents, you needed to type things like \verb|\'{e}| and \verb|\~{n}| to get \'e and \~n. Nowadays it is better to use a richer input encoding scheme.
+
+Include \verb|\usepackage[utf8]{inputenc}|\footnote{If you are exchanging your documents with people using Windows, it will be better for cross platform purposes to use the latin 1 encoding scheme~--- use \texttt{[latin1]} instead of \texttt{[utf8]}.} to tell \TeX\ that you are giving it a unicode file. (Make sure that you tell your application that you want to indeed use this encoding scheme.\footnotemark) Now you can type accents directly from the keyboard, so typing words like ``résumé'' or ``naïve'' is much more pleasant.
+
+\footnotetext{Choose the appropriate document encoding in preferences or type ``\%\&encoding=Latin 1'' near the top of the document.}
+
+\item	Look in the source of the preceding dot point for the two methods of creating footnotes. \marginpar{It's real easy to make notes in the margin...} To create margin notes, use the \verb|\marginpar| command.
+\end{itemize}
+
+\end{document}

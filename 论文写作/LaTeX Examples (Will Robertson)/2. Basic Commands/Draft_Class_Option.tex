@@ -1,0 +1,42 @@
+% Copyright (C) Will Robertson 2004. 
+%
+% Permission is given to freely distribute and modify 
+% this document provided attribution is given.
+
+\documentclass[12pt,draft,article]{memoir}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\chapter*{The \texttt{draft} class option}
+
+The \texttt{draft} class option will display badly typeset lines with a black margin mark. For example, a list of words that are 23 letters long\footnote{\texttt{egrep [a-z]\{23\} /usr/share/dict/web2}} will not typeset nicely---note how the right margin is not flush---because it consists of lots of big words:
+
+anthropomorphologically
+blepharosphincterectomy
+epididymodeferentectomy
+formaldehydesulphoxylate
+formaldehydesulphoxylic
+gastroenteroanastomosis
+hematospectrophotometer
+macracanthrorhynchiasis
+pancreaticoduodenostomy
+pathologicohistological
+pathologicopsychological
+pericardiomediastinitis
+phenolsulphonephthalein
+philosophicotheological
+pseudolamellibranchiate
+scientificogeographical
+scientificophilosophical
+tetraiodophenolphthalein
+thymolsulphonephthalein
+thyroparathyroidectomize
+transubstantiationalist
+
+While contrived, this demonstrates very well what happens when \TeX\ can't find any appropriate ways to typeset the text you've given it.
+
+Other packages will behave appropriately with this option as well: \textsf{graphicx} will display blank squares instead of the real image; and \textsf{hyperref} will not colour any hyperlinks. 
+
+\end{document}

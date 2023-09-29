@@ -1,0 +1,45 @@
+% Copyright (C) Will Robertson 2004. 
+%
+% Permission is given to freely distribute and modify 
+% this document provided attribution is given.
+
+\documentclass[article,openany]{memoir}
+
+\pagestyle{empty} % no headers or footers
+
+\begin{document}
+
+This document shows every hierarchal level you may have headings in a document. The class options chosen are \texttt{article}, which condenses the space used by chapter headings, and \texttt{openany}, which allows chapters to begin on any new page---usually they open only on right-side (or \emph{recto}) pages.
+
+To change how deep the numbers go, use the command \verb|\maxsecnumdepth{}|. For example, to number section headings all the way down to the subsubsection level, I could use the command \verb|\maxsecnumdepth{subsubsection}|. The default is to number only chapters and sections (\verb|\maxsecnumdepth{section}|).
+
+If you want the Table of Contents to include more of the document structure hierarchy, use the \texttt{maxtocdepth} command in a similar way; the default is \verb|\maxtocdepth{section}|
+
+\part{Document structure hierarchy}
+
+\chapter{Chapter}
+
+Top level of text\dots
+
+\chapter*{Starred form}
+
+Any of these commands may be used with an asterisk (eg \verb|\chapter*{Starred form}|) to omit its number.
+
+\section{Section}
+
+2nd level
+
+\subsection{Subsection}
+
+3rd level
+
+\subsubsection{Subsubsection}
+
+4th level
+
+\paragraph{Paragraph}
+5th level
+\subparagraph{Subparagraph}
+Bottom level
+
+\end{document}

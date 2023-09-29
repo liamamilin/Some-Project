@@ -1,0 +1,43 @@
+% Copyright (C) Will Robertson 2004. 
+%
+% Permission is given to freely distribute and modify 
+% this document provided attribution is given.
+
+\documentclass[12pt,article]{memoir}
+\usepackage{amsmath}
+\begin{document}
+
+\chapter*{Math with \textsf{amsmath}}
+
+The \textsf{amsmath} package provides much more advanced math capability compared to basic \LaTeX . While it provides many environments in which to display math, I am only showing a small number of them in this document.
+
+The most versatile environment for displaying math is \texttt{align}. It allows multiple lines of math (numbering each line), with an alignment point for (optional) multiple columns.
+
+The basic environment, without an equation number (by using the `starred' version of the environment, \verb|align*|). Without alignment, the equation is centred, the same as using \verb|\[...\]|:
+\begin{align*}
+	a + b = c + d
+\end{align*}
+%
+Use the familiar \verb|\\| to start a new line, and an ampersand (\verb|&|) for alignment:\footnote{I align my equations \emph{after} the equals sign, for reasons that become clear later; for correct spacing, empty curly braces must be inserted before the ampersand.}
+\begin{align}
+	a + b = {}& c + d \\
+	e = {}& f + g + h
+\end{align}
+%
+With multiple columns:
+\begin{align}
+	a = {}& b + c 	&	j = {}& k + l + m 	&	u + v = {}& w \\
+	d + e = {}& f 	&	n + o + p = {}& q 	&	x = {}& y + z
+\end{align}
+%
+The \textsf{amsmath} package defines the \texttt{split} environment to break a single equation over multiple lines. See now how easy it is to align the three lines when the alignment point lies \emph{after} the equals sign:
+\begin{align}
+	x = {}& y + z \\
+	\begin{split}
+		a = {}& b + c \\
+		{}& + d + e
+	\end{split}
+\end{align}
+%
+I find these two environments sufficient for almost everything. Look at one of the various math guides for other environments the \textsf{amsmath} package provides if \texttt{align} and \texttt{split} do not serve your purposes.
+\end{document}

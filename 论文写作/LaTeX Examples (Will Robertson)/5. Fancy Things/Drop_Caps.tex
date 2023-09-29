@@ -1,0 +1,40 @@
+% Copyright (C) Will Robertson 2004. 
+%
+% Permission is given to freely distribute and modify 
+% this document provided attribution is given.
+
+\documentclass[12pt,article]{memoir}
+
+\usepackage{type1cm} % this is necessary to scale the dropped capital to the correct arbitrary size
+\usepackage{amssymb} % for mathbb
+
+\usepackage{lettrine} % the package that does all the work!
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\baselineskip}
+
+\setlength{\DefaultNindent}{0pt}
+\setcounter{DefaultLines}{2} % try 3 or 4!
+
+\renewcommand{\LettrineFontHook}{\fontfamily{ppl}}
+
+\begin{document}
+
+\section*{Drop-caps with \textsf{lettrine}}
+
+Some basic drop cap examples. \textit{Nota bene} You should globally set the font used for your drop caps with the \verb|\LettrineFontHook|. \textit{Id est} use a command like:\\
+\verb|\renewcommand{\LettrineFontHook}{\fontfamily{ppl}}|\\
+which changes the font used for the drop cap to (in this case) Palatino.
+
+\lettrine{W}{elcome} to an example drop-capped paragraph. I want it really long so it extends over several lines, because there's really not much point in writing an example paragraph for a dropped capital if there is nowhere for it to protrude\dots.
+
+\lettrine{\textsf{S}}{}% using a custom bit of font changing to get get smaller sans serif
+{\sffamily\scriptsize ANS} serif doesn't look too bad. It's nice with the constant width `S'. The \textsf{lettrine} documentation contains a (French) demo of the advanced features of this package. With tweaking per character, you can get some fantastic results.
+
+\lettrine{$\mathbb{P}$}{lease} have a look at the \texttt{fancy-math-fonts.tex} example for some more ideas on using alternate fonts here. I'd recommend Euler Caligraphic (with the \textsf{eucal} package) and Euler Fractur (with the \textsf{amssymb} or \textsf{amsfonts} packages).
+
+\lettrine[loversize=0.2,findent=3pt,nindent=-2pt]{\fontfamily{pzc}\selectfont {R}}{emember}
+% Zapf chancery needs some massaging to fit nicely---there are lots of facilities for this
+ not to over-do any font changing in your document. I'm not even sure how suitable drop caps are in most circumstances. But don't they look nice?
+
+\end{document}

@@ -1,0 +1,51 @@
+% Copyright (C) Will Robertson 2004. 
+%
+% Permission is given to freely distribute and modify 
+% this document provided attribution is given.
+
+\documentclass[article]{memoir}
+
+\usepackage{amsfonts}
+\usepackage{type1cm} % allow arbitrary scaling
+
+% RSFS:
+\DeclareSymbolFont{rsfs}{U}{rsfs}{m}{n}
+\DeclareSymbolFontAlphabet{\mathrsfs}{rsfs}
+% In mathrsfs.sty, this font is defined as \mathscr
+
+% Euler calligraphic:
+\DeclareMathAlphabet\EuScript{U}{eus}{m}{n}
+\SetMathAlphabet\EuScript{bold}{U}{eus}{b}{n}
+% In mathcal.sty, this font is defined either as \mathcal or \mathscr
+
+\newcommand{\mathtest}[1]{
+{\begin{flushright}\Huge$#1{ABCDEFGHIJKLM}$\par$#1{NOPQRSTUVWXYZ}$\end{flushright}}
+}
+
+\setlength{\parskip}{1ex}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\chapter*{fancy math fonts}
+
+The following fonts are classically used for maths, but you may choose to use them for fancy writing in drop caps or signatures, for example (see the \texttt{drop-caps.tex} example). They must be used inside math mode.
+
+\verb|\mathcal| by default accesses the following Calligraphic font:
+\mathtest{\mathcal}
+
+The \textsf{eucal} package defines \verb|\mathcal| (by default) or \verb|\mathscr| (with the \texttt{mathscr} package option) to call the Euler Calligraphic font:
+\mathtest{\EuScript}
+
+The \textsf{amsfonts} package provides the following two fonts, which are especially useful for maths: (it is also loaded by the \textsf{amssymb} package)
+
+AMS (Euler) Fraktur with \verb|\mathfrak|:
+\mathtest{\mathfrak}
+
+AMS Blackboard with \verb|\mathbb|:
+\mathtest{\mathbb}
+
+The \textsf{mathrsfs} package defines \verb|\mathscr| to call the Ralph Smith Formal Script font:
+\mathtest{\mathrsfs}
+
+\end{document} 

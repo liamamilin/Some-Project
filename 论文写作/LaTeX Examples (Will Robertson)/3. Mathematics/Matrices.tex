@@ -1,0 +1,81 @@
+% Copyright (C) Will Robertson 2004. 
+%
+% Permission is given to freely distribute and modify 
+% this document provided attribution is given.
+
+\documentclass[12pt,article]{memoir}
+\usepackage{amsmath}
+\begin{document}
+
+\chapter*{Matrices}
+
+There are a couple of equivalent ways to show matrices. Choose whichever you prefer, but please be consistent.
+
+The \textsf{amsmath} package defines the \texttt{matrix} environment and its friends:
+\begin{align*}
+	&
+	\begin{matrix}
+		a & b\\
+		c & d
+	\end{matrix}
+	&
+	&
+	\begin{pmatrix}
+		a & b\\
+		c & d
+	\end{pmatrix}
+	&
+	&
+	\begin{Bmatrix}
+		a & b\\
+		c & d
+	\end{Bmatrix}
+	&
+	&
+	\begin{bmatrix}
+		a & b\\
+		c & d
+	\end{bmatrix}
+	&
+	&
+	\begin{vmatrix}
+		a & b\\
+		c & d
+	\end{vmatrix}
+	&
+	&
+	\begin{Vmatrix}
+		a & b\\
+		c & d
+	\end{Vmatrix}
+\end{align*}
+%
+The \textsf{memoir} class defines the \texttt{array}\footnote{Also see the \textsf{array} package if you're not using \textsf{memoir}} environment:
+\begin{align*}
+	&
+	\begin{array}{cc}
+		a & b \\
+		c & d \\
+	\end{array}
+	&
+	&
+	\begin{array}({cc})
+		a & b \\
+		c & d \\
+	\end{array}
+	&
+	&
+	\begin{array}|{cc}|
+		a & b \\
+		c & d \\
+	\end{array}
+	&
+	&
+	\begin{array}\{{cc}\}
+		a & b \\
+		c & d \\
+	\end{array}
+\end{align*}
+%
+In both cases, the various enclosed matrices or arrays are simply shorthand ways of wrapping the naked environment with \verb|\left(...\right)| (or whatever delimiter) pairs. The \texttt{array} environment is more flexible because it supports the same column formatting arguments as the \texttt{tabular} environment.
+\end{document}

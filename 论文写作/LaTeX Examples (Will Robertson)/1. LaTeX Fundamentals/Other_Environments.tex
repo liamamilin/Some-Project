@@ -1,0 +1,58 @@
+% Copyright (C) Will Robertson 2004. 
+%
+% Permission is given to freely distribute and modify 
+% this document provided attribution is given.
+
+\documentclass[12pt,a4paper,article]{memoir}
+
+%\tightlists % this command will remove inter-item space from ALL lists 
+
+\begin{document}
+
+\chapter*{Some other basic environments}
+
+\section*{The \texttt{verse} environment}
+
+For writing verse or poetry. Separate lines with the newline command (\textbackslash\textbackslash) and stanzas with a blank line, the same as for separating paragraphs in text.
+
+\begin{verse}
+The verse environment is for poetry. Lines which wrap are \emph{out}dented.\\
+This is because individual lines are important\\
+Because it's for poetry!
+
+The verse environment is for poetry. Lines which wrap are \emph{out}dented.\\
+This is because individual lines are important\\
+Because it's for poetry!
+\end{verse}
+
+\section*{The \texttt{quote} environment}
+
+\begin{quote}
+The quote environment does not indent its paragraphs, but it does separate them with space. The quote environment does not indent its paragraphs, but it does separate them with space.
+
+The quote environment does not indent its paragraphs, but it does separate them with space. The quote environment does not indent its paragraphs, but it does separate them with space.
+\end{quote}
+
+\section*{The \texttt{quotation} environment}
+
+\begin{quotation}
+The quotation environment \emph{does} indent its paragraphs. The quotation environment \emph{does} indent its paragraphs. The quotation environment \emph{does} indent its paragraphs.
+
+The quotation environment \emph{does} indent its paragraphs. The quotation environment \emph{does} indent its paragraphs. The quotation environment \emph{does} indent its paragraphs.
+\end{quotation}
+
+\noindent The different environments for quotations are very similar. I would recommend you choose one and run with it rather than mixing the two in a single document.
+
+\section*{The \texttt{verbatim} environment}
+
+This environment is for displaying literal \TeX\ code source. It has some improvements in the \textsf{memoir} class, based on the \textsf{verbatim} package.
+
+\begin{verbatim}
+% An example document
+\documentclass[article]{memoir}
+\begin{document}
+Hello world.
+\end{document}
+\end{verbatim}
+
+\end{document}

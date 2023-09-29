@@ -1,0 +1,31 @@
+% Copyright (C) Will Robertson 2004. 
+%
+% Permission is given to freely distribute and modify 
+% this document provided attribution is given.
+
+\documentclass[12pt,article]{memoir}
+
+\newcommand{\pkg}[1]{\textsf{#1}}
+\newcommand{\cmd}[1]{\texttt{#1}}
+\newcommand{\strong}[1]{{\sffamily \bfseries #1}}
+
+\begin{document}
+
+\chapter*{Defining your own commands}
+
+I will only touch on this subject. In the preamble, you may define your own commands with the \verb|\newcommand{}[]{}| command. These become indispensable when writing long, structured documents. For example, all through these example documents, I have been writing package names in a sans serif font and commands in a fixed-width typewriter font, but using \verb|\textsf| and \verb|\texttt| respectively.
+
+It would have been much better of me to define \emph{new} commands, let's say \verb|\pkg| and \verb|\cmd|, for these tasks. Have a look in the preamble to this document how I should have gone about this:
+%
+\begin{verbatim}
+\newcommand{\pkg}[1]{\textsf{#1}}
+\newcommand{\cmd}[1]{\texttt{#1}}
+\end{verbatim}
+
+The commands should be fairly self-evident. The first argument is the name of the new command. The second optional argument is the number of arguments your new command is to have; and the third argument stands for the definition of your command, with passed arguments \#1\dots\#9 (yes, that means no more than nine arguments).
+
+So now let's say I'm talking about the \verb|\cmd{href}| command of the \verb|\pkg{hyperref}| package. Notice I'm using my new commands. Not only are they styled how I like, they even make \emph{logical} sense now. The source now contains more \emph{meaning} than if I'd written ``the \verb|\texttt{href}| command of the \verb|\textsf{hyperref}| package''. The same is even more true for my other new command \verb"\strong"---see the first word of the next paragraph.
+
+\strong{Furthermore}, what if I wish to \emph{change} the way I'm displaying those commands? Imagine if I'd typed in explicitly every font-changing command (as is the case for all of these example documents). To change packages to bold and commands to small caps I'd have to go through the whole lot of them and alter \emph{every single instance}. If I've defined \verb|\pkg| in the preamble and used it instead, I simply have to alter my definition and re-compile my document. I'm sure you can see the advantage.
+
+\end{document}

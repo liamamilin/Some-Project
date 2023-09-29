@@ -1,0 +1,92 @@
+% Copyright (C) Will Robertson 2004. 
+%
+% Permission is given to freely distribute and modify 
+% this document provided attribution is given.
+
+\documentclass[12pt,article]{memoir}
+
+%\tightlists % this command will remove inter-item space from ALL lists 
+
+\begin{document}
+
+\chapter*{Basic lists}
+
+\section*{Plain \LaTeX\ versions}
+
+The \texttt{enumerate} environment:
+
+\begin{enumerate}
+	\item The first item
+	\item The second item
+	
+	You can put paragraph text in between items
+	
+	\item The third item
+\end{enumerate}
+
+\noindent The \texttt{itemize} environment:
+
+\begin{itemize}
+	\item The first item
+	\item The second item
+	
+	You can put paragraph text in between items
+	
+	\item The third item
+\end{itemize}
+
+\noindent The \texttt{description} environment.
+
+\begin{description}
+	\item[hello] a common greeting
+	\item[goodbye] a common farewell
+\end{description}
+
+\section*{\textsf{Memoir} extensions}
+
+The \textsf{memoir} class, as usual, has extended the functionality of the first two of the above lists. The functionality is based on the \textsf{enumerate} package. If you need even more options, you may look to the \textsf{paralist} package to solve your problems.
+
+The new things you can do revolve mostly around list spacing and the symbols used before each item. To remove all inter-item space, put the \verb| \tightlists| command anywhere before your lists. (The \verb| \defaultlists| command will return things to normal.) Following are some of the things you can do with the new \texttt{enumerate} and \texttt{itemize} environments.
+
+\subsection*{Some \texttt{enumerate} environments}
+\tightlists
+\begin{enumerate}[{A}1]
+	\item This env. has an optional argument to change the look of it.
+	\item The argument is \verb|[{A}1]|.
+	\item The text in the curly brackets is included as is. (It can be anything.)
+	\item The `1' is the index of the item. Other options are available\dots
+\end{enumerate}
+
+\begin{enumerate}[\scshape i]
+	\item Index options are: \texttt{[1]} (default), \texttt{[i]},\texttt{[I]},\texttt{[A]}
+	\item 1 goes 1,2,3,4,\dots
+	\item i goes i,ii,iii,iv,\dots
+	\item I goes I,II,III,IV,\dots
+	\item A goes A,B,C,D,\dots
+\end{enumerate}
+
+\defaultlists
+
+\subsection*{Some \texttt{itemize} environments}
+
+\begin{itemize}
+	\firmlist
+	\item \textsf{Memoir} lets you adjust the spacing of your lists individually.
+	\item This list contains a \verb|\firmlist| command, which reduces some of the inter-item spacing.
+\end{itemize}
+
+\begin{itemize}[\S]
+	\item Option arguments for \texttt{itemize} allow you to customise the bullet for each item.
+	\item You probably \emph{don't} want to use this list as an example.
+\end{itemize}
+
+\begin{itemize}[\$]
+\tightlist
+	\item This list contains a \verb|\tightlist| command, which removes all inter-item space.
+	\item These spacing commands also work in \texttt{enumerate}.
+	\item You can put anything you want for the bullet.
+\end{itemize}
+
+
+
+\end{document}

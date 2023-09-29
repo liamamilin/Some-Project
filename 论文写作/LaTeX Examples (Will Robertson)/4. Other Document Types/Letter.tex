@@ -1,0 +1,57 @@
+% Copyright (C) Will Robertson 2004. 
+%
+% Permission is given to freely distribute and modify 
+% this document provided attribution is given.
+
+\documentclass[a4paper,12pt]{letter}
+
+\name{Dr. L. User} % To be used for the return address on the envelope
+\signature{Larry User} % Goes after the closing
+\address{3245 Foo St.\\Gnu York\\USA}
+% Alternatively, these may be set on an individual basis within the letter environment.
+
+\makelabels % this command prints envelope labels on the final page of the document
+
+\begin{document}
+
+
+\begin{letter}{Sam Jones \\ Institute for Study\\ Princeton, N.J.} 
+
+\opening{Deer John,} 
+
+This is the basic \LaTeX\ letter class. It uses the classic formal letter layout, and is quite simple. It has most of the features of the \textsf{article} class, such as the enumerate, etc., environments and table/array capabilities.
+
+This template is for the people who say ``oh, \TeX\ is clearly good for long reports and stuff, but writing a letter's heaps easier in Word''. I hope you'll agree the time saved \emph{not} setting up margins and indents, \textsl{ad nauseum} every time you need to write a letter, more than tips to balance in \LaTeX's favour.
+
+\closing{Sincerely,}
+
+\cc{Tinker\\Evers\\Chance} 
+
+\encl{R\'esum\'e\\References} 
+
+\ps{PS How 'bout this letter class?}
+\ps{PPS Don't forget to look at \textsf{scrlttr2}, the KOMA-Script letter class, as well.}
+
+\end{letter}
+
+
+
+
+\begin{letter}{Albert Bensimon\\Adelaide, SA\\AUSTRALIA 5001}
+
+\opening{To whom-ever it may or may not concern,}
+
+You could keep all of your correspondence to a single person in a single document. If you really wanted. Don't forget to check out the envelope labels on the last page...but be warned: they're not very fancy!
+
+If you don't want the next bit indented so much (or at all!), you can set the length with a \verb|\setlength{\longindentation}{0pt}|.
+
+\setlength{\longindentation}{0pt}
+
+\closing{Sincerely,}
+
+\ps{\textsc{ps}: Don't use the other KOMA-Script letter class (\textsf{scrlettr})---it is obsolete!}
+
+\end{letter}
+
+
+\end{document}

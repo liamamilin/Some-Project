@@ -1,0 +1,40 @@
+% Copyright (C) Will Robertson 2004. 
+%
+% Permission is given to freely distribute and modify 
+% this document provided attribution is given.
+
+\documentclass[12pt,article]{memoir}
+\usepackage{amsmath}
+\usepackage{bm}
+\begin{document}
+
+\chapter*{Bold math with \textsf{bm}}
+
+This is actually pretty simple. Within math you may use the \verb|\mathXX| with \texttt{XX} = \texttt{rm}, \texttt{sf}, etc\dots command to get the various text fonts in math mode. This is good because vectors in math are often displayed with upright bold symbols. For example:
+\[
+\vec{M} = \mathbf{M} = (M_x,M_y,M_z)
+\]
+So people get the idea that \verb|\mathbf| is the way to get bold symbols in math mode. However, what happens when you try Greek in there?\\
+\verb|$\mathbf{\xi}$| $=\mathbf{\xi}$, i.e. it doesn't work. That \textit{xi} is not bold!
+
+The same thing happens if there is no bold version of the font we've chosen for text mode (for example, Knuth's Concrete font, available in scalable Type 1 format in the CM-Super font package). We want instead a command which accesses the bold version of our \emph{math} font. The \textsf{bm} package provides the \texttt{bm} command for exactly this purpose:
+
+\begin{center}
+   \begin{tabular}{@{} rc @{}} % Column formatting, @{} suppresses leading/trailing space
+      \toprule
+      Command    & Output \\
+      \midrule
+	\verb|${a}$| & $a$\\
+	\verb|$\mathbf{a}$| & $\mathbf{a}$\\
+	\verb|$\bm{a}$| & $\bm{a}$\\
+	\midrule
+	\verb|${\xi}$| & $\xi$\\
+	\verb|$\mathbf{\xi}$| & $\mathbf{\xi}$\\
+	\verb|$\bm{\xi}$| & $\bm{\xi}$\\	
+      \bottomrule
+   \end{tabular}
+\end{center}
+
+And there you have it. This command will also do things like make bold centred dots ($\bm{\cdot}$) for vector dot multiplication, or bold integral signs ($\bm{\int}$) if you really feel inclined.
+
+\end{document}
