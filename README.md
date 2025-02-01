@@ -24,6 +24,14 @@ https://user-images.githubusercontent.com/24915545/216400463-3cbc677e-878e-4e09-
 对于商家而言，货到付款这种支付方式不利于现金的流动，并且，有一部分人会在货到了之后不付款，也就是拒收。拒收的原因很多，很简单的就是不想要了。
 
 一般而言，货到付款的拒收率可以高达20%，这将造成很大的运营成本。因此，本文利用机器学习的方法，对用户是否回拒收进行预测。
-
 点击链接可以直接查看：https://bookdown.org/connect/#/apps/1713/access
+
+# 跨境电商 dantsili 
+
+![image](https://github.com/user-attachments/assets/29af89cc-9b54-491a-9f61-662a1c4923cd)
+
+
+
+
+
 
