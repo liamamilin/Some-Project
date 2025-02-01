@@ -74,7 +74,7 @@
      * Monitored and optimized models.
    * **Results**: Reduced rejection rate by 5%.
 
-## Personal Achievements
+## Personal Work
 
 * **Books Published**:
     * **Milin, (2020).** *In-Depth R Language Data Analysis*, China: Tsinghua University Press (http://www.tup.com.cn/bookscenter/book_08573301.html)
