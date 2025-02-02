@@ -79,7 +79,7 @@
     * **Milin, (2021).** *R Language Data Visualization Practice*, China: Mechanical Industry Press (https://www.hzmedia.com.cn/books11121329)
     * **Milin, (2023).** *R Language Statistical Analysis Practice*, China: Beijing Institute of Technology Press (https://book.douban.com/subject/36632913/)
 * **E-books**:
-    * *Language Data Analysis Cases* (https://bit.ly/3sz0Iet)
+    * *R Language Data Analysis Cases* (https://bit.ly/3sz0Iet)
     * *On-chain Data Analysis Practice* (https://liamamilin.github.io/ChainAnalysis2025/index.html)
     * *Indicator System Construction - Theory and Practice* (https://liamamilin.github.io/Indicator_system/)
     * *R Language Process Mining* (https://liamamilin.github.io/ProcessMiningRBook/)
@@ -91,7 +91,7 @@
     - ppmr (https://github.com/liamamilin/ppmr)
 * **Shiny Data Products**:
     - Recommendation System (https://liam.shinyapps.io/RecommendationSystem/?_ga=2.131911375.1106465743.1636945544-1201958693.1635388833)
-    - ChainBot (https://liam.shinyapps.io/ChatRobot/)
+    - ChatBot (https://liam.shinyapps.io/ChatRobot/)
 * **Cross-border E-commerce Independent Site**:
     - Achieved $10,000 USD in sales.
 * **On-chain Data Analysis**:
