@@ -78,7 +78,7 @@
     * **米霖 (2021)**. *R语言数据可视化实战*, 中国: 机械工业出版社 (https://www.hzmedia.com.cn/books11121329)
     * **米霖 (2023)**. *R语言统计分析实战*, 中国: 北京理工大学出版社 (https://book.douban.com/subject/36632913/)
 * **电子书籍**:
-    * *语言数据分析案例* (https://bit.ly/3sz0Iet)
+    * *R语言数据分析案例* (https://bit.ly/3sz0Iet)
     * *链上数据分析实战* (https://liamamilin.github.io/ChainAnalysis2025/index.html)
     * *指标体系建设 - 理论与实践* (https://liamamilin.github.io/Indicator_system/)
     * *R语言流程挖掘* (https://liamamilin.github.io/ProcessMiningRBook/)
