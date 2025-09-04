@@ -77,6 +77,7 @@
     * **米霖 (2020)**. *深入浅出R语言数据分析*, 中国: 清华大学出版社 (http://www.tup.com.cn/bookscenter/book_08573301.html)
     * **米霖 (2021)**. *R语言数据可视化实战*, 中国: 机械工业出版社 (https://www.hzmedia.com.cn/books11121329)
     * **米霖 (2023)**. *R语言统计分析实战*, 中国: 北京理工大学出版社 (https://book.douban.com/subject/36632913/)
+    * **米霖 (2025)**. *SPSS入门与数据分析实践*,中国: 化学工业出版社(http://jx.tsxcfw.com/bookshow.asp?id=2914368)
 * **电子书籍**:
     * *R语言数据分析案例* (https://bit.ly/3sz0Iet)
     * *链上数据分析实战* (https://liamamilin.github.io/ChainAnalysis2025/index.html)
